@@ -7,9 +7,7 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -19,16 +17,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 
 public class SettingController extends Controller implements Initializable {
-	private Stage stage;
-	private AnchorPane root;
-	private Scene scene;
-	
 	 @FXML
 	 private DatePicker SettingBirth;
 
@@ -133,16 +126,12 @@ public class SettingController extends Controller implements Initializable {
          alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
          alert.showAndWait().ifPresent(response -> {
              if (response == ButtonType.OK) {
-            	 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-                 try {
-					root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+            	 try {
+					super.adminMyAccount(event);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-                 scene = new Scene(root);
-                 stage.setScene(scene);
-                 stage.show();
              }
          });
 	 }

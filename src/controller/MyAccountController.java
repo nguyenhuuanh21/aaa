@@ -7,6 +7,11 @@ import javafx.fxml.FXML;
 
 
 public class MyAccountController extends Controller {
+	
+	@FXML
+    public void editProfile(ActionEvent event)throws IOException{
+    	super.setting(event);
+    }
 
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
@@ -35,7 +40,7 @@ public class MyAccountController extends Controller {
 	
 	@FXML
     public void adminSetting(ActionEvent event)throws IOException{
-    	super.adminSetting(event);
+    	super.adminMyAccount(event);
     }
 	
 

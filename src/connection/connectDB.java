@@ -36,9 +36,9 @@ public class connectDB {
 				String password = rs.getString("password");
 				String name = rs.getString("name");
 				String gender = rs.getString("Gender");
-				String phone = rs.getString("phone_number");
+				String phone = rs.getString("phone");
 				String address = rs.getString("address");
-				String dateOfBirth = rs.getString("dateOfBirth");
+				String dateOfBirth = rs.getString("birth");
 				String department = rs.getString("department");
 				list.add(new Employee(id, name, gender, dateOfBirth, department, address, phone, email, password));
 				System.out.print("ID: " + id);

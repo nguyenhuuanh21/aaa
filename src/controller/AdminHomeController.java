@@ -76,7 +76,7 @@ public class AdminHomeController extends Controller implements Initializable{
 		
 		@FXML
 	    public void adminSetting(ActionEvent event)throws IOException{
-	    	super.adminSetting(event);
+	    	super.adminMyAccount(event);
 	    }
 		
 

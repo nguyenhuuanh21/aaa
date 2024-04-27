@@ -35,7 +35,7 @@ public class ReportController extends Controller {
 	
 	@FXML
     public void adminSetting(ActionEvent event)throws IOException{
-    	super.adminSetting(event);
+    	super.adminMyAccount(event);
     }
 	
 

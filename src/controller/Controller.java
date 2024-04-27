@@ -15,6 +15,8 @@ public class Controller {
 	private Stage stage;
 	private AnchorPane root;
 	private Scene scene;
+	
+	
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
     	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -22,6 +24,24 @@ public class Controller {
 				root = FXMLLoader.load(getClass().getResource("/view/adminHome.fxml"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+        if(root == null) {
+        	System.out.println("Root is null");
+        	return;
+        }
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+	
+	@FXML
+    public void setting(ActionEvent event)throws IOException{
+    	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+    	 try {
+				root = FXMLLoader.load(getClass().getResource("/view/Setting.fxml"));
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
@@ -148,10 +168,10 @@ public class Controller {
     }
 	
 	@FXML
-    public void adminSetting(ActionEvent event)throws IOException{
+    public void adminMyAccount(ActionEvent event)throws IOException{
     	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
     	 try {
-				root = FXMLLoader.load(getClass().getResource("/view/Setting.fxml"));
+				root = FXMLLoader.load(getClass().getResource("/view/MyAccount.fxml"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

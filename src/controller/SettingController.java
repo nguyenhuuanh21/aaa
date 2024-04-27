@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -27,12 +28,12 @@ public class SettingController extends Controller implements Initializable {
 	private Stage stage;
 	private AnchorPane root;
 	private Scene scene;
+	
+	 @FXML
+	 private DatePicker SettingBirth;
 
     @FXML
     private Label settingError;
-	
-	@FXML
-    private TextField SettingBirth;
 
     @FXML
     private TextField SettingPhone;
@@ -100,7 +101,7 @@ public class SettingController extends Controller implements Initializable {
 	
 	@FXML
     public void adminSetting(ActionEvent event)throws IOException{
-    	super.adminSetting(event);
+    	super.adminMyAccount(event);
     }
 	
 

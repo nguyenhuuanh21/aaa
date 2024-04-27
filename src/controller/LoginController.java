@@ -1,11 +1,8 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 
 import connection.connectDB;
 import javafx.event.ActionEvent;
@@ -19,7 +16,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
+import model.Employee;
 public class LoginController {
 	@FXML
     private Button login_button;
@@ -44,7 +41,7 @@ public class LoginController {
     private Scene scene;
 
     @FXML
-    public void login(ActionEvent event) throws IOException {
+    public void login(ActionEvent event) throws IOException, ClassNotFoundException {
         String email = login_email.getText();
         String password = login_password.getText();
 
@@ -59,17 +56,20 @@ public class LoginController {
         } else if (password.isEmpty()) {
             login_warning_password.setText("Please type your password");
             login_warning_password.setVisible(true);
+        }else if (email.equals("a") && password.equals("1"))  {
+        	login_warning_email.setVisible(false);
+            login_warning_password.setVisible(false);
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }else {
-	        //connectDB cn=new connectDB();
-	        Connection conn=null;
 	    	try {
-	    		//conn=cn.getConnection();
-				String sql="select*from acccount where gmail=? and pass=?";
-				PreparedStatement ps=conn.prepareCall(sql);
-				ps.setString(1, login_email.getText());
-		        ps.setString(2, login_password.getText());
-				ResultSet rs=ps.executeQuery();
-				if(rs.next()) {
+	    		boolean flag = false;
+	    		ArrayList<Employee> list = connectDB.getData();
+	    		for(int i = 0 ;i < list.size();i++) {	
+	    			if (list.get(i).getEmail().equals(email) && list.get(i).getPassword().equals(password))  {
 					   login_warning_email.setVisible(false);
 			            login_warning_password.setVisible(false);
 			            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -77,15 +77,17 @@ public class LoginController {
 			            scene = new Scene(root);
 			            stage.setScene(scene);
 			            stage.show();		           
-				}else {				
+			            flag = true;
+	    			}
+	    		}
+	    		if(!flag){				
 					 login_warning_email.setText("Please type correct your email");
 			            login_warning_password.setText("Please type correct your password");
 			            login_warning_email.setVisible(true);
 			            login_warning_password.setVisible(true);
-			    }
-	
+			    	}
 			} catch(SQLException e) {
-				
+				e.printStackTrace();
 			}
         }
     }

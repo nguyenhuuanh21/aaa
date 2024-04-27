@@ -3,13 +3,14 @@ package connection;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+//import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 
 
 
 public class connectDB {
 	 public Connection getConnection() {
-	        var server = "LAPTOP-0M51BIGT\\SQLEXPRESS";
+		return null;
+	        /*var server = "LAPTOP-0M51BIGT\\SQLEXPRESS";
 	        var user = "sa";
 	        var password = "anhkk123";
 	        var db = "student_management";
@@ -30,5 +31,6 @@ public class connectDB {
 	            ex.printStackTrace();
 	        }
 	        return conn;
+	        */
 	    }
 }

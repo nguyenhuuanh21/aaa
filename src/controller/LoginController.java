@@ -60,10 +60,10 @@ public class LoginController {
             login_warning_password.setText("Please type your password");
             login_warning_password.setVisible(true);
         }else {
-	        connectDB cn=new connectDB();
+	        //connectDB cn=new connectDB();
 	        Connection conn=null;
 	    	try {
-	    		conn=cn.getConnection();
+	    		//conn=cn.getConnection();
 				String sql="select*from acccount where gmail=? and pass=?";
 				PreparedStatement ps=conn.prepareCall(sql);
 				ps.setString(1, login_email.getText());

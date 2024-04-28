@@ -3,8 +3,19 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
+
+import connection.connectDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Department;
 
 public class AddAccountController extends Controller implements Initializable {
 
@@ -53,14 +65,20 @@ public class AddAccountController extends Controller implements Initializable {
 
     @FXML
     private void showGender() {
-
+    	addGender.getItems().add("Male");
+    	addGender.getItems().add("Female");
     }
-
+    
     @FXML
     private void showDepartment() {
-
+    	List<Department> departments = connectDB.readDepartment();
+    	String []id=new String[departments.size()+1];
+    	for(int i=0;i<departments.size();i++) {
+    		id[i]=departments.get(i).getDepartment_id();
+    		addDepartment.getItems().addAll(id);
+    	}
     }
-
+   
     @FXML
     public void insertImage() {
         FileChooser fileChooser = new FileChooser();
@@ -93,9 +111,40 @@ public class AddAccountController extends Controller implements Initializable {
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    connectDB cn=new connectDB();
+                    Connection conn=null;
+                	try {
+                   	    conn=cn.getConnection();
+                        String sql="INSERT INTO Employee(employee_name, gender, date_of_birth, department_id, address, phone, email, password)"
+                        		+ " values(?,?,?,?,?,?,?,?)";
+                        PreparedStatement ps=conn.prepareCall(sql);
+                        ps.setString(1,addName.getText());
+                        ps.setString(2,addGender.getValue());
+                        LocalDate localDate = addBirth.getValue();
+                        java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+                        ps.setDate(3, (java.sql.Date) sqlDate);
+                        ps.setString(4,addDepartment.getValue());
+                        ps.setString(5,addAddress.getText());
+                        ps.setString(6,addPhone.getText());
+                        ps.setString(7,addEmail.getText());
+                        ps.setString(8,addPassword.getText());
+                        int n=ps.executeUpdate();
+            			if(n!=0) {
+            				alert1.setContentText("Register successfully");
+                            System.out.println("Yes");
+                            alert1.showAndWait();
+            			}else {
+            				System.out.println("đăng kí thất bại");
+            			}
+            		} catch(SQLException e) {
+            			e.printStackTrace();
+            		}
+                	/*
                     alert1.setContentText("Register successfully");
                     System.out.println("Yes");
+                    
                     alert1.showAndWait();
+                    */
                     try {
                         super.adminEmployees(event);
                     } catch (IOException e) {
@@ -144,5 +193,11 @@ public class AddAccountController extends Controller implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
+    	 try {
+    	        showGender();
+    	        showDepartment();
+    	    } catch (Exception ex) {
+    	        ex.printStackTrace();
+    	    }
     }
 }

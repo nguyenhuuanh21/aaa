@@ -1,9 +1,6 @@
 package model;
 
 public class Department {
-
-	
-	
 	private String department_id;
 	private String department_name;
 	

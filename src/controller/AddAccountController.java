@@ -7,19 +7,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 
-//import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-
-import connection.connectDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,6 +25,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import model.*;
+import connection.connectDB;
 import connection.connectDepartment;
 
 import model.Department;
@@ -86,6 +77,7 @@ public class AddAccountController extends Controller implements Initializable {
     	
     	addDepartment.getItems().addAll(name);
    }
+   
 	/*
     private void showDepartment() {
     	List<Department> departments = connectDB.readDepartment();
@@ -96,6 +88,8 @@ public class AddAccountController extends Controller implements Initializable {
     	}
     }
     */
+   
+   
    
     @FXML
     public void insertImage() {
@@ -128,16 +122,10 @@ public class AddAccountController extends Controller implements Initializable {
             alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
-                    connectDB cn=new connectDB();
-                    Connection conn=null;
-                	
-                	/*
+                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);              	               	
                     alert1.setContentText("Register successfully");
-                    System.out.println("Yes");
-                    
-                    alert1.showAndWait();
-                    */
+                    System.out.println("Yes");                  
+                    alert1.showAndWait();              
                     try {
                         super.adminEmployees(event);
                     } catch (IOException e) {

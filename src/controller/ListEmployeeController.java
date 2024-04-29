@@ -4,9 +4,35 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 
 public class ListEmployeeController extends Controller {
+	
+	@FXML
+    private TableColumn<?, ?> colAddress;
+
+    @FXML
+    private TableColumn<?, ?> colBirth;
+
+    @FXML
+    private TableColumn<?, ?> colDepartment;
+
+    @FXML
+    private TableColumn<?, ?> colGender;
+
+    @FXML
+    private TableColumn<?, ?> colID;
+
+    @FXML
+    private TableColumn<?, ?> colName;
+
+    @FXML
+    private TableColumn<?, ?> colPhone;
+
+    @FXML
+    private TableView<?> tableView;
 
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{

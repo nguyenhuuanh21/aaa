@@ -3,6 +3,8 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -18,6 +20,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.*;
+import connection.connectDepartment;
 
 public class AddAccountController extends Controller implements Initializable {
 
@@ -50,15 +54,21 @@ public class AddAccountController extends Controller implements Initializable {
 
     @FXML
     private ImageView addImage;
-
+    
     @FXML
     private void showGender() {
-
+    	addGender.getItems().add("Male");
+    	addGender.getItems().add("Female");
     }
 
     @FXML
-    private void showDepartment() {
-
+    private void showDepartment() throws ClassNotFoundException, SQLException {
+    	ArrayList<Department> list = connectDepartment.getDepartment();
+    	String[] name = new String[list.size()];
+    	for(int i = 0 ;i < list.size();i++)
+    		name[i] = list.get(i).getName();
+    	
+    	addDepartment.getItems().addAll(name);
     }
 
     @FXML
@@ -144,5 +154,12 @@ public class AddAccountController extends Controller implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
+    	try {
+			showDepartment();
+			showGender();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

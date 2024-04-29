@@ -3,20 +3,19 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+
 import java.util.ResourceBundle;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+<<<<<<< HEAD
 import connection.ConnectEmployee;
 import connection.connectDB;
 import connection.connectDepartment;
+=======
+>>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +29,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import model.*;
+import connection.connectDB;
+import connection.connectDepartment;
+
 import model.Department;
 import model.Employee;
 
@@ -64,14 +68,24 @@ public class AddAccountController extends Controller implements Initializable {
 
     @FXML
     private ImageView addImage;
-
+    
     @FXML
     private void showGender() {
     	addGender.getItems().add("Male");
     	addGender.getItems().add("Female");
     }
     
-    @FXML
+   @FXML
+    private void showDepartment() throws ClassNotFoundException, SQLException {
+    	ArrayList<Department> list = connectDepartment.getDepartment();
+    	String[] name = new String[list.size()];
+    	for(int i = 0 ;i < list.size();i++)
+    		name[i] = list.get(i).getDepartment_name();
+    	
+    	addDepartment.getItems().addAll(name);
+   }
+   
+	/*
     private void showDepartment() {
     	List<Department> departments = connectDepartment.readDepartment();
     	String []id=new String[departments.size()+1];
@@ -80,6 +94,9 @@ public class AddAccountController extends Controller implements Initializable {
     		addDepartment.getItems().addAll(id);
     	}
     }
+    */
+   
+   
    
     @FXML
     public void insertImage() {
@@ -112,6 +129,7 @@ public class AddAccountController extends Controller implements Initializable {
             alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
+<<<<<<< HEAD
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
                     Employee employee=new Employee(addName.getText(),addGender.getValue(),addBirth.getValue(),
                     		addDepartment.getValue(),addAddress.getText(),addPhone.getText(),addEmail.getText(),addPassword.getText());
@@ -124,11 +142,12 @@ public class AddAccountController extends Controller implements Initializable {
                     	 System.out.println("No"); 
                     }
                 	/*
+=======
+                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);              	               	
+>>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
                     alert1.setContentText("Register successfully");
-                    System.out.println("Yes");
-                    
-                    alert1.showAndWait();
-                    */
+                    System.out.println("Yes");                  
+                    alert1.showAndWait();              
                     try {
                         super.adminEmployees(event);
                     } catch (IOException e) {
@@ -177,11 +196,14 @@ public class AddAccountController extends Controller implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-    	 try {
-    	        showGender();
-    	        showDepartment();
-    	    } catch (Exception ex) {
-    	        ex.printStackTrace();
-    	    }
+
+    	try {
+			showDepartment();
+			showGender();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
     }
 }

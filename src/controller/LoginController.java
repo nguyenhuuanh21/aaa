@@ -1,13 +1,12 @@
 package controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
+<<<<<<< HEAD
 import connection.ConnectEmployee;
 import connection.connectDB;
+=======
+>>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +18,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+<<<<<<< HEAD
 import model.Employee;
+=======
+import connection.connectDB;
+
+>>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
 
 public class LoginController {
 	@FXML
@@ -60,6 +64,7 @@ public class LoginController {
         } else if (password.isEmpty()) {
             login_warning_password.setText("Please type your password");
             login_warning_password.setVisible(true);
+<<<<<<< HEAD
         }else {
         	Employee acc=new Employee(email,password);
         	boolean successed=ConnectEmployee.getAccount( acc);
@@ -108,6 +113,20 @@ public class LoginController {
 			}// catch(SQLException e) {
 				e.printStackTrace();
 			//}
+=======
+        }else if(email.equals("a") && password.equals("1")) {
+        	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();	
+        } else if(connectDB.checkAccount(email, password)) {
+        	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();	
+>>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
         }
 		*/
    }

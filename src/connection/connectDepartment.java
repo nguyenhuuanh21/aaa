@@ -1,7 +1,7 @@
 package connection;
 
 import java.sql.Connection;
-<<<<<<< HEAD
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,8 @@ public class connectDepartment {
 	        }
 	        return departments;
 	    }
-=======
+}
+/*
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,5 +82,6 @@ public class connectDepartment {
 			return list;
 		}
 	    	
->>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
+
 }
+*/

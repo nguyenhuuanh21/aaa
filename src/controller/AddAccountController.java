@@ -6,16 +6,14 @@ import java.net.URL;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.List;
 import java.util.ResourceBundle;
 
 
-<<<<<<< HEAD
 import connection.ConnectEmployee;
 import connection.connectDB;
 import connection.connectDepartment;
-=======
->>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -74,7 +72,7 @@ public class AddAccountController extends Controller implements Initializable {
     	addGender.getItems().add("Male");
     	addGender.getItems().add("Female");
     }
-    
+    /*
    @FXML
     private void showDepartment() throws ClassNotFoundException, SQLException {
     	ArrayList<Department> list = connectDepartment.getDepartment();
@@ -84,8 +82,8 @@ public class AddAccountController extends Controller implements Initializable {
     	
     	addDepartment.getItems().addAll(name);
    }
-   
-	/*
+   */
+    @FXML
     private void showDepartment() {
     	List<Department> departments = connectDepartment.readDepartment();
     	String []id=new String[departments.size()+1];
@@ -94,7 +92,7 @@ public class AddAccountController extends Controller implements Initializable {
     		addDepartment.getItems().addAll(id);
     	}
     }
-    */
+    
    
    
    
@@ -129,7 +127,6 @@ public class AddAccountController extends Controller implements Initializable {
             alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-<<<<<<< HEAD
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
                     Employee employee=new Employee(addName.getText(),addGender.getValue(),addBirth.getValue(),
                     		addDepartment.getValue(),addAddress.getText(),addPhone.getText(),addEmail.getText(),addPassword.getText());
@@ -141,6 +138,22 @@ public class AddAccountController extends Controller implements Initializable {
                     }else {
                     	 System.out.println("No"); 
                     }
+                	/*
+                    alert1.setContentText("Register successfully");
+                    System.out.println("Yes");
+                    
+                    alert1.showAndWait();
+                    */
+                    try {
+                        super.adminEmployees(event);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
+
                 	/*
 =======
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);              	               	
@@ -157,6 +170,7 @@ public class AddAccountController extends Controller implements Initializable {
             });
         }
     }
+    */
 
     @FXML
     public void adminHome(ActionEvent event) throws IOException {
@@ -200,9 +214,9 @@ public class AddAccountController extends Controller implements Initializable {
     	try {
 			showDepartment();
 			showGender();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (Exception ex) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ex.printStackTrace();
 		}
 
     }

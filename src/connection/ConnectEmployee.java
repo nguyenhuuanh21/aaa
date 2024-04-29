@@ -5,7 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
+import model.Department;
 import model.Employee;
 
 public class ConnectEmployee {
@@ -52,4 +57,33 @@ public class ConnectEmployee {
 			return false;
 
 	}
+	public static List<Employee> readEmployee() {
+        List<Employee> employees = new ArrayList<>();		       
+        Connection conn =connectDB.getConnection();
+        try (conn) {
+            var sql = "SELECT * FROM dbo.Employee"; // câu lệnh truy vấn SQL
+            var statement = conn.createStatement(); // lấy đối tượng Statement
+            var resultSet = statement.executeQuery(sql); // lấy đối tượng ResultSet
+            while (resultSet.next()) { // nếu có hàng dữ liệu kế tiếp
+            	var employee_id = String.valueOf(resultSet.getInt(1));
+                
+                var employee_name = resultSet.getString(2);
+                var gender=resultSet.getString(3);
+                var date_of_birth_sql=resultSet.getDate(4);
+                var date_of_birth=date_of_birth_sql.toLocalDate();
+                var department_id=resultSet.getString(5);
+                var address=resultSet.getString(6);
+                var phone=resultSet.getString(7);
+                var email=resultSet.getString(8);
+                var password=resultSet.getString(9);
+                Employee employee = new Employee(employee_id,employee_name,gender,date_of_birth,department_id,address,phone,email,password);
+                employees.add(employee); 
+            }
+        } catch (SQLServerException throwables) {
+            throwables.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return employees;
+    }
 }

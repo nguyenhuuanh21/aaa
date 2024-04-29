@@ -7,13 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+
 //import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
-//import com.microsoft.sqlserver.jdbc.SQLServerException;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import model.Employee;
 
 
-<<<<<<< HEAD
+
 	public class connectDB {
 		 public static Connection getConnection() {
 		        var server = "LAPTOP-0M51BIGT\\SQLEXPRESS";
@@ -38,8 +40,9 @@ import model.Employee;
 		        }
 		        return conn;
 		    }
+	}
 		
-=======
+/*
 public class connectDB {
 	static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost:3306/quan_ly_nhan_su";
@@ -103,6 +106,6 @@ public class connectDB {
 			
 			
 			return false;
-		}
->>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
+
 }
+*/

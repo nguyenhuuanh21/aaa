@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import connection.ConnectEmployee;
 import connection.connectDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,10 +20,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Employee;
 
 
-<<<<<<< HEAD
-public class ListEmployeeController extends Controller {
+
+
 	
-=======
+
 public class ListEmployeeController extends Controller implements Initializable {
 	
 	@FXML
@@ -49,14 +51,15 @@ public class ListEmployeeController extends Controller implements Initializable 
     private TableView<Employee> tableView;
     
     
-    
+    /*
     public void insertAccount() {
  	   
  	   connectDB.add(new Employee(1, null, null, null, null, null, null, null, null));
     }
+    */
     
     public void display() throws ClassNotFoundException, SQLException {
-        ArrayList<Employee> list = connectDB.getData();
+        List<Employee> list = ConnectEmployee.readEmployee();
 
         // Create an ObservableList from the list
         ObservableList<Employee> employeeList = FXCollections.observableArrayList(list);
@@ -74,7 +77,7 @@ public class ListEmployeeController extends Controller implements Initializable 
         colPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
->>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
+
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
     	super.adminHome(event);

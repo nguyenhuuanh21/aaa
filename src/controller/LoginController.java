@@ -1,12 +1,12 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
 
-<<<<<<< HEAD
 import connection.ConnectEmployee;
 import connection.connectDB;
-=======
->>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +18,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-<<<<<<< HEAD
+
 import model.Employee;
-=======
+
 import connection.connectDB;
 
->>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
+
 
 public class LoginController {
 	@FXML
@@ -64,7 +64,7 @@ public class LoginController {
         } else if (password.isEmpty()) {
             login_warning_password.setText("Please type your password");
             login_warning_password.setVisible(true);
-<<<<<<< HEAD
+
         }else {
         	Employee acc=new Employee(email,password);
         	boolean successed=ConnectEmployee.getAccount( acc);
@@ -78,9 +78,9 @@ public class LoginController {
 	            stage.show();		
         	}else {
         		 login_warning_email.setText("Please type correct your email");
-		            login_warning_password.setText("Please type correct your password");
-		            login_warning_email.setVisible(true);
-		            login_warning_password.setVisible(true);
+		         login_warning_password.setText("Please type correct your password");
+		         login_warning_email.setVisible(true);
+		         login_warning_password.setVisible(true);
         	}
         }
         	/*
@@ -110,7 +110,7 @@ public class LoginController {
 			            login_warning_password.setVisible(true);
 			    }
 	
-			}// catch(SQLException e) {
+			} catch(SQLException e) {
 				e.printStackTrace();
 			//}
 =======

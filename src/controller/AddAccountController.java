@@ -14,8 +14,9 @@ import java.util.ResourceBundle;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-
+import connection.ConnectEmployee;
 import connection.connectDB;
+import connection.connectDepartment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +31,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.Department;
+import model.Employee;
 
 public class AddAccountController extends Controller implements Initializable {
 
@@ -71,7 +73,7 @@ public class AddAccountController extends Controller implements Initializable {
     
     @FXML
     private void showDepartment() {
-    	List<Department> departments = connectDB.readDepartment();
+    	List<Department> departments = connectDepartment.readDepartment();
     	String []id=new String[departments.size()+1];
     	for(int i=0;i<departments.size();i++) {
     		id[i]=departments.get(i).getDepartment_id();
@@ -111,34 +113,16 @@ public class AddAccountController extends Controller implements Initializable {
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
-                    connectDB cn=new connectDB();
-                    Connection conn=null;
-                	try {
-                   	    conn=cn.getConnection();
-                        String sql="INSERT INTO Employee(employee_name, gender, date_of_birth, department_id, address, phone, email, password)"
-                        		+ " values(?,?,?,?,?,?,?,?)";
-                        PreparedStatement ps=conn.prepareCall(sql);
-                        ps.setString(1,addName.getText());
-                        ps.setString(2,addGender.getValue());
-                        LocalDate localDate = addBirth.getValue();
-                        java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
-                        ps.setDate(3, (java.sql.Date) sqlDate);
-                        ps.setString(4,addDepartment.getValue());
-                        ps.setString(5,addAddress.getText());
-                        ps.setString(6,addPhone.getText());
-                        ps.setString(7,addEmail.getText());
-                        ps.setString(8,addPassword.getText());
-                        int n=ps.executeUpdate();
-            			if(n!=0) {
-            				alert1.setContentText("Register successfully");
-                            System.out.println("Yes");
-                            alert1.showAndWait();
-            			}else {
-            				System.out.println("đăng kí thất bại");
-            			}
-            		} catch(SQLException e) {
-            			e.printStackTrace();
-            		}
+                    Employee employee=new Employee(addName.getText(),addGender.getValue(),addBirth.getValue(),
+                    		addDepartment.getValue(),addAddress.getText(),addPhone.getText(),addEmail.getText(),addPassword.getText());
+                    int n=ConnectEmployee.addEmployee(employee);
+                    if(n!=0) {
+                    	alert1.setContentText("Register successfully");
+                        System.out.println("Yes");                      
+                        alert1.showAndWait();
+                    }else {
+                    	 System.out.println("No"); 
+                    }
                 	/*
                     alert1.setContentText("Register successfully");
                     System.out.println("Yes");

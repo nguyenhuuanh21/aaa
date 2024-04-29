@@ -1,10 +1,12 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Employee {
 	int id;
 	String name;
 	String gender;
-	String birth;
+	LocalDate birth;
 	String department;
 	String address;
 	String phone;
@@ -12,7 +14,24 @@ public class Employee {
 	String password;
 	
 	
-	public Employee(int id,String name, String gender, String birth, String department, String address, String phone,
+	public Employee(String email, String password) {
+		super();
+		this.email = email;
+		this.password = password;
+	}
+	public Employee(String name, String gender, LocalDate birth, String department, String address, String phone,
+			String email, String password) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.birth = birth;
+		this.department = department;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+		this.password = password;
+	}
+	public Employee(int id,String name, String gender, LocalDate birth, String department, String address, String phone,
 			String email, String password) {
 		super();
 		this.name = name;
@@ -42,10 +61,10 @@ public class Employee {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getBirth() {
+	public LocalDate getBirth() {
 		return birth;
 	}
-	public void setBirth(String birth) {
+	public void setBirth(LocalDate birth) {
 		this.birth = birth;
 	}
 	public String getDepartment() {

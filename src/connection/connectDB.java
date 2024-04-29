@@ -39,24 +39,5 @@ import model.Employee;
 		        }
 		        return conn;
 		    }
-		 public static List<Department> readDepartment() {
-		        List<Department> departments = new ArrayList<>();		       
-		        Connection conn=getConnection();
-		        try (conn) {
-		            var sql = "SELECT * FROM dbo.department"; // câu lệnh truy vấn SQL
-		            var statement = conn.createStatement(); // lấy đối tượng Statement
-		            var resultSet = statement.executeQuery(sql); // lấy đối tượng ResultSet
-		            while (resultSet.next()) { // nếu có hàng dữ liệu kế tiếp
-		                var department_id = resultSet.getString(1);
-		                var department_name = resultSet.getString(2);
-		                Department department = new Department(department_id,department_name);
-		                departments.add(department); 
-		            }
-		        } catch (SQLServerException throwables) {
-		            throwables.printStackTrace();
-		        } catch (SQLException throwables) {
-		            throwables.printStackTrace();
-		        }
-		        return departments;
-		    }
+		
 }

@@ -30,7 +30,7 @@ public class connectDepartment {
 		
 				System.out.println("STEP 4: Extract data from result set");
 			while (rs.next()) {	
-				int id = rs.getInt("id");
+				String id = rs.getString("id");
 				String name = rs.getString("name");
 				list.add(new Department(id, name));
 				System.out.print("ID: " + id);

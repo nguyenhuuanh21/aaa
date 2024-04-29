@@ -3,10 +3,23 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
+//import com.microsoft.sqlserver.jdbc.SQLServerException;
+
+
+import connection.connectDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,8 +33,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import model.*;
 import connection.connectDepartment;
+
+import model.Department;
 
 public class AddAccountController extends Controller implements Initializable {
 
@@ -60,17 +76,27 @@ public class AddAccountController extends Controller implements Initializable {
     	addGender.getItems().add("Male");
     	addGender.getItems().add("Female");
     }
-
-    @FXML
+    
+   @FXML
     private void showDepartment() throws ClassNotFoundException, SQLException {
     	ArrayList<Department> list = connectDepartment.getDepartment();
     	String[] name = new String[list.size()];
     	for(int i = 0 ;i < list.size();i++)
-    		name[i] = list.get(i).getName();
+    		name[i] = list.get(i).getDepartment_name();
     	
     	addDepartment.getItems().addAll(name);
+   }
+	/*
+    private void showDepartment() {
+    	List<Department> departments = connectDB.readDepartment();
+    	String []id=new String[departments.size()+1];
+    	for(int i=0;i<departments.size();i++) {
+    		id[i]=departments.get(i).getDepartment_id();
+    		addDepartment.getItems().addAll(id);
+    	}
     }
-
+    */
+   
     @FXML
     public void insertImage() {
         FileChooser fileChooser = new FileChooser();
@@ -103,9 +129,15 @@ public class AddAccountController extends Controller implements Initializable {
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    connectDB cn=new connectDB();
+                    Connection conn=null;
+                	
+                	/*
                     alert1.setContentText("Register successfully");
                     System.out.println("Yes");
+                    
                     alert1.showAndWait();
+                    */
                     try {
                         super.adminEmployees(event);
                     } catch (IOException e) {
@@ -154,6 +186,7 @@ public class AddAccountController extends Controller implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
+
     	try {
 			showDepartment();
 			showGender();
@@ -161,5 +194,6 @@ public class AddAccountController extends Controller implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
     }
 }

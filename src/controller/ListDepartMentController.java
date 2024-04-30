@@ -9,18 +9,7 @@ import javafx.scene.control.TableView;
 
 
 public class ListDepartMentController extends Controller {
-	@FXML
-    private TableColumn<?, ?> departmentEmployee;
-
-    @FXML
-    private TableColumn<?, ?> departmentID;
-
-    @FXML
-    private TableColumn<?, ?> departmentName;
-    @FXML
-    private TableView<?> tableview;
-
-
+	
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
     	super.adminHome(event);

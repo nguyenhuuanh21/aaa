@@ -2,7 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -41,9 +41,9 @@
             </Label>
          </children>
       </VBox>
-      <VBox layoutX="663.0" layoutY="278.0" prefHeight="454.0" prefWidth="500.0">
+      <VBox layoutX="663.0" layoutY="278.0" prefHeight="466.0" prefWidth="500.0">
          <children>
-            <Label prefHeight="78.0" prefWidth="171.0" text="LOGIN" textFill="#5e7ff1">
+            <Label prefHeight="67.0" prefWidth="171.0" text="LOGIN" textFill="#5e7ff1">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
@@ -84,7 +84,12 @@
                </children>
             </HBox>
             <Label fx:id="login_warning_password" prefHeight="18.0" prefWidth="274.0" text="Please type correct your password" textFill="RED" visible="false" />
-            <CheckBox fx:id="login_remember" mnemonicParsing="false" onAction="#toggleShowPassword" text="Remember account" textFill="#5e7ff1" />
+            <VBox alignment="TOP_RIGHT" prefHeight="61.0" prefWidth="500.0">
+               <children>
+                  <ComboBox fx:id="rote" prefHeight="38.0" prefWidth="459.0" promptText="choose your rote" style="-fx-border-color: #5E7FF1;" styleClass="bellow-bor" stylesheets="@styles.css" />
+                  <Label fx:id="labelRote" prefHeight="18.0" prefWidth="446.0" text="You need to choose your rote" textFill="RED" visible="false" />
+               </children>
+            </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button fx:id="login_button" mnemonicParsing="false" onAction="#login" prefHeight="66.0" prefWidth="271.0" styleClass="cs-button" stylesheets="@style2.css" text="Log In" textFill="WHITE">

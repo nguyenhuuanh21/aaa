@@ -3,23 +3,26 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import connection.ConnectEmployee;
-import connection.ConnectDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.util.Callback;
 import model.Employee;
-
-
 
 public class ListEmployeeController extends Controller implements Initializable {
 
@@ -45,6 +48,9 @@ public class ListEmployeeController extends Controller implements Initializable 
     private TableColumn<Employee, String> colPhone;
 
     @FXML
+    private TableColumn<Employee, String> colEdit;
+
+    @FXML
     private TableView<Employee> tableView;
 
     public void display() throws ClassNotFoundException, SQLException {
@@ -64,51 +70,73 @@ public class ListEmployeeController extends Controller implements Initializable 
         colDepartment.setCellValueFactory(new PropertyValueFactory<>("department"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        Callback<TableColumn<Employee, String>, TableCell<Employee, String>> cellFactory = (
+                TableColumn<Employee, String> param) -> {
+            // Make cell containing buttons
+            final TableCell<Employee, String> cell = new TableCell<Employee, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    // This cell is created only on non-empty rows
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+                    } else {
+                        ImageView deleteIcon = new ImageView(new Image("/image/trash.jpg"));
+                        ImageView editIcon = new ImageView(new Image("/image/pencil.jpg"));
+
+                        deleteIcon.setStyle("-fx-cursor: hand;" + "-glyph-size: 28px;");
+                        editIcon.setStyle("-fx-cursor: hand;" + "-glyph-size: 28px;");
+                        deleteIcon.setOnMouseClicked((MouseEvent event) -> {
+                            //Employee employee = getTableView().getItems().get(getIndex());
+                            // Implement delete functionality here
+                        });
+                        editIcon.setOnMouseClicked((MouseEvent event) -> {
+                            
+                        });
+
+                        HBox manageBtn = new HBox(editIcon, deleteIcon);
+                        manageBtn.setStyle("-fx-alignment: center");
+                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
+                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
+
+                        setGraphic(manageBtn);
+                        setText(null);
+                    }
+                }
+            };
+
+            return cell;
+        };
+        colEdit.setCellFactory(cellFactory);
     }
 
-    @FXML
     public void adminHome(ActionEvent event) throws IOException {
         super.adminHome(event);
     }
 
-    @FXML
     public void adminEmployees(ActionEvent event) throws IOException {
         super.adminEmployees(event);
     }
-
-    @FXML
+    
     public void adminDepartment(ActionEvent event) throws IOException {
         super.adminDepartment(event);
     }
-
-    @FXML
-    public void adminDelete(ActionEvent event) throws IOException {
-        super.adminDelete(event);
+    
+    public void setting(ActionEvent event) throws IOException {
+        super.setting(event);
     }
-
-    @FXML
-    public void adminAdd(ActionEvent event) throws IOException {
-        super.adminAdd(event);
+    
+    public void logout(ActionEvent event) throws IOException {
+        super.logout(event);
     }
-
-    @FXML
+    
     public void calendar(ActionEvent event) throws IOException {
         super.calendar(event);
     }
-
-    @FXML
+    
     public void adminReport(ActionEvent event) throws IOException {
         super.adminReport(event);
-    }
-
-    @FXML
-    public void adminSetting(ActionEvent event) throws IOException {
-        super.adminMyAccount(event);
-    }
-
-    @FXML
-    public void logout(ActionEvent event) throws IOException {
-        super.logout(event);
     }
 
     @Override

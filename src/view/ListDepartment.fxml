@@ -122,15 +122,11 @@
                   </Button>
                </children>
             </HBox>
-            <TableView layoutY="94.0" prefHeight="502.0" prefWidth="954.0" stylesheets="@styles.css">
+            <TableView fx:id="tableview" layoutY="94.0" prefHeight="502.0" prefWidth="954.0" stylesheets="@styles.css">
               <columns>
-                <TableColumn prefWidth="123.20002746582031" text="C1" />
-                <TableColumn prefWidth="93.5999755859375" text="C2" />
-                  <TableColumn prefWidth="129.60003662109375" text="C2" />
-                  <TableColumn prefWidth="143.20001220703125" text="C2" />
-                  <TableColumn prefWidth="148.800048828125" text="C2" />
-                  <TableColumn prefWidth="88.00006103515625" text="C2" />
-                  <TableColumn prefWidth="178.4000244140625" text="C2" />
+                <TableColumn fx:id="departmentID" prefWidth="123.20002746582031" text="ID" />
+                <TableColumn fx:id="departmentName" prefWidth="422.4000244140625" text="Name" />
+                  <TableColumn fx:id="departmentEmployee" prefWidth="360.79998779296875" text="Total Employee" />
               </columns>
             </TableView>
             <HBox alignment="BOTTOM_CENTER" layoutY="596.0" prefHeight="79.0" prefWidth="954.0" spacing="20.0" />

@@ -4,9 +4,22 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 
 public class ListDepartMentController extends Controller {
+	@FXML
+    private TableColumn<?, ?> departmentEmployee;
+
+    @FXML
+    private TableColumn<?, ?> departmentID;
+
+    @FXML
+    private TableColumn<?, ?> departmentName;
+    @FXML
+    private TableView<?> tableview;
+
 
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{

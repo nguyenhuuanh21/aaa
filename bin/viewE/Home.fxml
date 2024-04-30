@@ -32,17 +32,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="menu_edit" layoutX="10.0" layoutY="505.0" mnemonicParsing="false" onAction="#adminEmployees" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="USER" textFill="#5e7ff1">
-               <graphic>
-                  <FontAwesomeIcon fill="#5e7ff1" glyphName="EDIT" size="25" />
-               </graphic>
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
             <Button fx:id="menu_department" layoutX="10.0" layoutY="380.0" mnemonicParsing="false" onAction="#adminDepartment" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="DEPARTMENT" textFill="#5e7ff1">
                <graphic>
                   <FontAwesomeIcon fill="#5e7ff1" glyphName="EDIT" size="25" text="" />
@@ -65,16 +54,16 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="10.0" layoutY="474.0" mnemonicParsing="false" onAction="#adminReport" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="REPORT" textFill="#5e7ff1">
-               <graphic>
-                  <FontAwesomeIcon fill="#5e7ff1" glyphName="ARCHIVE" size="25" />
-               </graphic>
+            <Button layoutX="10.0" layoutY="474.0" mnemonicParsing="false" onAction="#adminReport" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="Notification" textFill="#5e7ff1">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
+               <graphic>
+                  <FontAwesomeIcon fill="#5e7ff1" glyphName="BELL" size="25" />
+               </graphic>
             </Button>
             <Button fx:id="menu_setting" layoutX="10.0" layoutY="536.0" mnemonicParsing="false" onAction="#adminSetting" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="SETTING" textFill="#5e7ff1">
                <graphic>

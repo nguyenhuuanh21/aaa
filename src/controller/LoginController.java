@@ -75,6 +75,7 @@ public class LoginController implements Initializable {
         }else if(email.equals("a") && password.equals("1")) {
         	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+            //root = FXMLLoader.load(getClass().getResource("/viewE/Home.fxml"));
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

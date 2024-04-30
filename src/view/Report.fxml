@@ -101,7 +101,7 @@
                   <Font name="System Bold" size="29.0" />
                </font>
             </Label>
-            <VBox layoutX="80.0" layoutY="71.0" prefHeight="481.0" prefWidth="810.0" />
+            <VBox fx:id="report" layoutX="80.0" layoutY="71.0" prefHeight="481.0" prefWidth="810.0" />
             <TextField layoutX="97.0" layoutY="604.0" prefHeight="50.0" prefWidth="629.0" promptText="send notification" styleClass="bellow-bor" stylesheets="@styles.css">
                <font>
                   <Font size="16.0" />
@@ -112,6 +112,8 @@
                   <FontAwesomeIcon fill="GREY" glyphName="SHARE" size="3em" />
                </graphic>
             </Button>
+            <Button layoutX="309.0" layoutY="564.0" mnemonicParsing="false" onAction="#previous" prefHeight="24.0" prefWidth="108.0" style="-fx-border-color: gray;" styleClass="cs-button" stylesheets="@styles.css" text="Previous Page" />
+            <Button layoutX="445.0" layoutY="564.0" mnemonicParsing="false" onAction="#next" prefHeight="24.0" prefWidth="108.0" style="-fx-border-color: gray;" styleClass="cs-button" stylesheets="@styles.css" text="Next Page" />
          </children>
       </AnchorPane>
    </children>

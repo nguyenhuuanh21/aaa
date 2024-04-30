@@ -15,7 +15,25 @@ public class Controller {
 	private Stage stage;
 	private AnchorPane root;
 	private Scene scene;
-	
+
+	@FXML
+    public void edit(ActionEvent event)throws IOException{
+    	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+    	 try {
+				root = FXMLLoader.load(getClass().getResource("/viewE/Setting.fxml"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+        if(root == null) {
+        	System.out.println("Root is null");
+        	return;
+        }
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 	
 	@FXML
     public void HomeE(ActionEvent event)throws IOException{
@@ -57,7 +75,7 @@ public class Controller {
     public void calendarE(ActionEvent event)throws IOException{
     	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
     	 try {
-				root = FXMLLoader.load(getClass().getResource("/view/Calendar.fxml"));
+				root = FXMLLoader.load(getClass().getResource("/viewE/Calendar.fxml"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

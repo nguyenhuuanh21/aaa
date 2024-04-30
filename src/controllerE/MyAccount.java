@@ -6,6 +6,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 public class MyAccount extends Controller  {
 	@FXML
+    public void editProfile(ActionEvent event)throws IOException{
+    	super.edit(event);
+    }
+	@FXML
     public void HomeE(ActionEvent event)throws IOException {
     	super.HomeE(event);
     }

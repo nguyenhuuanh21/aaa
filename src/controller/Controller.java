@@ -17,6 +17,7 @@ public class Controller {
 	private Scene scene;
 	
 	
+	
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
     	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();

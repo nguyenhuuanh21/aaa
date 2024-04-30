@@ -86,8 +86,8 @@
             <Label fx:id="login_warning_password" prefHeight="18.0" prefWidth="274.0" text="Please type correct your password" textFill="RED" visible="false" />
             <VBox alignment="TOP_RIGHT" prefHeight="61.0" prefWidth="500.0">
                <children>
-                  <ComboBox fx:id="rote" prefHeight="38.0" prefWidth="459.0" promptText="choose your rote" style="-fx-border-color: #5E7FF1;" styleClass="bellow-bor" stylesheets="@styles.css" />
-                  <Label fx:id="labelRote" prefHeight="18.0" prefWidth="446.0" text="You need to choose your rote" textFill="RED" visible="false" />
+                  <ComboBox fx:id="rote" prefHeight="38.0" prefWidth="459.0" promptText="choose your role" style="-fx-border-color: #5E7FF1;" styleClass="bellow-bor" stylesheets="@styles.css" />
+                  <Label fx:id="labelRote" prefHeight="18.0" prefWidth="446.0" text="You need to choose your role" textFill="RED" visible="false" />
                </children>
             </VBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

@@ -2,8 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -72,6 +70,8 @@ public class LoginController implements Initializable {
             login_warning_password.setText("Please type your password");
             login_warning_password.setVisible(true);
 
+        }else if(rote.getValue() == null) {
+        	labelRote.setVisible(true);
         }else if(email.equals("a") && password.equals("1")) {
         	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));

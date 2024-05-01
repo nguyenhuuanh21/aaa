@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectDB {
     static final String MYSQL_DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
-    static final String MYSQL_DB_URL = "jdbc:mysql://localhost:3306/quan_ly_nhan_su";
+    static final String MYSQL_DB_URL = "jdbc:mysql://localhost:3306/database";
     static final String MYSQL_USER = "root";
     static final String MYSQL_PASS = "";
     

@@ -1,10 +1,49 @@
 package controllerE;
 
+import java.io.File;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 public class Setting extends Controller  {
+	
+	 @FXML
+	 public void insertImage() {
+		 FileChooser fileChooser = new FileChooser();
+	        fileChooser.setTitle("Select Image File");
+	        fileChooser.getExtensionFilters().addAll(
+	                new FileChooser.ExtensionFilter("image", "*.png", "*.jpg", "*.gif")
+	        );
+
+	        File selectedFile = fileChooser.showOpenDialog(new Stage());
+	        if (selectedFile != null) {
+	            Image image = new Image(selectedFile.toURI().toString());
+	            //myImage.setImage(image);
+	        }
+	 }
+	
+	@FXML
+	 public void saveInfor(ActionEvent event) {
+		 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Save Profile");
+        alert.setContentText("Do you want to save?");
+        alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+           	 try {
+					super.MyAccountE(event);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
+	 }
 	@FXML
     public void HomeE(ActionEvent event)throws IOException {
     	super.HomeE(event);

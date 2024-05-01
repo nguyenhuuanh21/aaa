@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import connection.ConnectEmployee;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +24,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import model.Employee;
-
 public class ListEmployeeController extends Controller implements Initializable {
 
     @FXML
@@ -54,7 +54,7 @@ public class ListEmployeeController extends Controller implements Initializable 
     private TableView<Employee> tableView;
 
     public void display() throws ClassNotFoundException, SQLException {
-        List<Employee> list = ConnectEmployee.readEmployee();
+        List<Employee> list = ConnectEmployee.readEmployees();
 
         // Create an ObservableList from the list
         ObservableList<Employee> employeeList = FXCollections.observableArrayList(list);
@@ -82,17 +82,20 @@ public class ListEmployeeController extends Controller implements Initializable 
                         setGraphic(null);
                         setText(null);
                     } else {
-                        ImageView deleteIcon = new ImageView(new Image("/image/trash.jpg"));
-                        ImageView editIcon = new ImageView(new Image("/image/pencil.jpg"));
+                    	String currentDir = System.getProperty("user.dir");
+                    	ImageView deleteIcon = new ImageView(new Image("file:" + currentDir + "/image/trash.jpg"));
+                    	ImageView editIcon = new ImageView(new Image("file:" + currentDir + "/image/pencil.jpg")); 
+                    	
+                    	
+                     
 
-                        deleteIcon.setStyle("-fx-cursor: hand;" + "-glyph-size: 28px;");
-                        editIcon.setStyle("-fx-cursor: hand;" + "-glyph-size: 28px;");
+
                         deleteIcon.setOnMouseClicked((MouseEvent event) -> {
-                            //Employee employee = getTableView().getItems().get(getIndex());
+                            Employee employee = getTableView().getItems().get(getIndex());
                             // Implement delete functionality here
                         });
                         editIcon.setOnMouseClicked((MouseEvent event) -> {
-                            
+                            // Implement edit functionality here
                         });
 
                         HBox manageBtn = new HBox(editIcon, deleteIcon);

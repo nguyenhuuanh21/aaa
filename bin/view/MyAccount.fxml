@@ -16,7 +16,7 @@
       <VBox alignment="CENTER" layoutX="-1.0" prefHeight="750.0" prefWidth="230.0" stylesheets="@styles.css">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" />
-            <Button  mnemonicParsing="false" onAction="#adminHome" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="Home" textFill="#5e7ff1">
+            <Button mnemonicParsing="false" onAction="#adminHome" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="Home" textFill="#5e7ff1">
                <graphic>
                   <FontAwesomeIcon fill="#5e7ff1" glyphName="HOME" size="25" text="" />
                </graphic>
@@ -110,7 +110,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
+                        <Label fx:id="name" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -124,7 +124,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
+                        <Label fx:id="gender" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -138,7 +138,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
+                        <Label fx:id="birth" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -152,7 +152,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
+                        <Label fx:id="department" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -171,7 +171,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
+                        <Label fx:id="address" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -185,7 +185,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
+                        <Label fx:id="phone" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -204,7 +204,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
+                        <Label fx:id="email" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -218,7 +218,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
+                        <Label fx:id="password" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>

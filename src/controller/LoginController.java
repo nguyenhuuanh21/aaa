@@ -25,7 +25,7 @@ import model.Employee;
 
 
 
-public class LoginController implements Initializable {
+public class LoginController  implements Initializable {
 	
 	 @FXML
 	private Label labelRote;
@@ -52,6 +52,11 @@ public class LoginController implements Initializable {
     private Stage stage;
     private AnchorPane root;
     private Scene scene;
+    
+    private static int ID;
+    public static int getID() {
+    	return ID;
+    }
 
     @FXML
     public void login(ActionEvent event) throws IOException, SQLException {
@@ -85,9 +90,12 @@ public class LoginController implements Initializable {
             if (successed) {
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+                ID = ConnectEmployee.getId(acc);
+                System.out.println(ID);
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+          
             } else {
                 login_warning_email.setText("Please type correct your email");
                 login_warning_password.setText("Please type correct your password");

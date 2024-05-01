@@ -99,5 +99,11 @@ public class Employee {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", gender=" + gender + ", birth=" + birth + ", department="
+				+ department + ", address=" + address + ", phone=" + phone + ", email=" + email + ", password="
+				+ password + "]";
+	}
 	
 }

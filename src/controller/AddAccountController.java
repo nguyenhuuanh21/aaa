@@ -135,6 +135,7 @@ public class AddAccountController extends Controller implements Initializable {
                     	alert1.setContentText("Register successfully");
                         System.out.println("Yes");                      
                         alert1.showAndWait();
+                        connectDepartment.updateQuantity();
                     }else {
                     	 System.out.println("No"); 
                     }

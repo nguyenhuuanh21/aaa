@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
@@ -10,6 +11,7 @@ import connection.connectDB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -43,46 +45,60 @@ public class LoginController {
 
     @FXML
     private Label login_warning_password;
-
+    private FXMLLoader loader;
     private Stage stage;
     private AnchorPane root;
     private Scene scene;
+    private Employee loggedInEmployee;
 
     @FXML
     public void login(ActionEvent event) throws IOException {
         String email = login_email.getText();
         String password = login_password.getText();
+        try {
+        	 if (email.isEmpty() && password.isEmpty()) {
+                 login_warning_email.setText("Please type your email");
+                 login_warning_password.setText("Please type your password");
+                 login_warning_email.setVisible(true);
+                 login_warning_password.setVisible(true);
+             } else if (email.isEmpty()) {
+                 login_warning_email.setText("Please type your email");
+                 login_warning_email.setVisible(true);
+             } else if (password.isEmpty()) {
+                 login_warning_password.setText("Please type your password");
+                 login_warning_password.setVisible(true);
 
-        if (email.isEmpty() && password.isEmpty()) {
-            login_warning_email.setText("Please type your email");
-            login_warning_password.setText("Please type your password");
-            login_warning_email.setVisible(true);
-            login_warning_password.setVisible(true);
-        } else if (email.isEmpty()) {
-            login_warning_email.setText("Please type your email");
-            login_warning_email.setVisible(true);
-        } else if (password.isEmpty()) {
-            login_warning_password.setText("Please type your password");
-            login_warning_password.setVisible(true);
-
-        }else {
-        	Employee acc=new Employee(email,password);
-        	boolean successed=ConnectEmployee.getAccount( acc);
-        	if(successed) {
-        		login_warning_email.setVisible(false);
-	            login_warning_password.setVisible(false);
-	            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-	            root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
-	            scene = new Scene(root);
-	            stage.setScene(scene);
-	            stage.show();		
-        	}else {
-        		 login_warning_email.setText("Please type correct your email");
-		         login_warning_password.setText("Please type correct your password");
-		         login_warning_email.setVisible(true);
-		         login_warning_password.setVisible(true);
-        	}
+             }else {
+            	 Employee acc=new Employee(email,password);
+              	boolean successed=ConnectEmployee.getAccount( acc);
+              	if(successed) {
+              		
+                		login_warning_email.setVisible(false);
+        	            login_warning_password.setVisible(false);
+        	            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        	            root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+        	            scene = new Scene(root);
+        	            stage.setScene(scene);
+        	            stage.show();		
+             	      
+             	}else {
+             		 login_warning_email.setText("Please type correct your email");
+     		         login_warning_password.setText("Please type correct your password");
+     		         login_warning_email.setVisible(true);
+     		         login_warning_password.setVisible(true);
+             	}
+             }
+        } catch (Exception e) {
+            // Xử lý ngoại lệ được ném trong quá trình đăng nhập
+            if (e instanceof InvocationTargetException) {
+                Throwable targetException = ((InvocationTargetException) e).getTargetException();
+                targetException.printStackTrace();
+            } else {
+                e.printStackTrace();
+            }
         }
+       
+        
         	/*
         }	
             connectDB cn=new connectDB();
@@ -130,6 +146,7 @@ public class LoginController {
         }
 		*/
    }
+   
 
     @FXML
     public void toggleShowPassword(ActionEvent event) {

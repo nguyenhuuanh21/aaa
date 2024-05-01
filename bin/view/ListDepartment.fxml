@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListDepartMentController">
+<AnchorPane prefHeight="698.0" prefWidth="1141.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListDepartMentController">
    <children>
       <VBox alignment="CENTER" layoutX="-1.0" prefHeight="750.0" prefWidth="230.0" stylesheets="@styles.css">
          <children>
@@ -97,7 +97,7 @@
             <FontAwesomeIcon fill="#5e7ff1" glyphName="USER" size="30" />
          </children>
       </HBox>
-      <AnchorPane layoutX="239.0" layoutY="62.0" prefHeight="678.0" prefWidth="953.0" style="-fx-background-color: white;">
+      <AnchorPane accessibleRole="IMAGE_VIEW" layoutX="239.0" layoutY="62.0" prefHeight="678.0" prefWidth="953.0" style="-fx-background-color: white;">
          <children>
             <HBox layoutY="26.0" prefHeight="50.0" prefWidth="954.0">
                <children>
@@ -122,18 +122,15 @@
                   </Button>
                </children>
             </HBox>
-            <TableView layoutY="94.0" prefHeight="502.0" prefWidth="954.0" stylesheets="@styles.css">
+            <TableView fx:id="tableView" layoutX="14.0" layoutY="90.0" prefHeight="574.0" prefWidth="916.0" stylesheets="@styles.css">
               <columns>
-                <TableColumn prefWidth="123.20002746582031" text="C1" />
-                <TableColumn prefWidth="93.5999755859375" text="C2" />
-                  <TableColumn prefWidth="129.60003662109375" text="C2" />
-                  <TableColumn prefWidth="143.20001220703125" text="C2" />
-                  <TableColumn prefWidth="148.800048828125" text="C2" />
-                  <TableColumn prefWidth="88.00006103515625" text="C2" />
-                  <TableColumn prefWidth="178.4000244140625" text="C2" />
+                <TableColumn fx:id="Id" prefWidth="132.66668701171875" text="Department ID" />
+                <TableColumn fx:id="Name" prefWidth="498.66656494140625" text="Department Name" />
+                  <TableColumn fx:id="Quantity" prefWidth="275.3333740234375" sortType="DESCENDING" text="Department quantity" />
               </columns>
             </TableView>
             <HBox alignment="BOTTOM_CENTER" layoutY="596.0" prefHeight="79.0" prefWidth="954.0" spacing="20.0" />
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

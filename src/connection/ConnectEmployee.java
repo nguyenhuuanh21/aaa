@@ -86,4 +86,29 @@ public class ConnectEmployee {
         }
         return employees;
     }
+	public static Employee getEmployeeByEmail(String email) {
+		var conn =connectDB.getConnection();
+		Employee employee=null;
+		try(conn){
+			 String sql = "SELECT * FROM Employee WHERE email = ?";
+		     PreparedStatement ps = conn.prepareStatement(sql);
+		     ps.setString(1, email);
+		     ResultSet rs = ps.executeQuery();
+		     if(rs.next()) {
+		    	 String employee_id = String.valueOf(rs.getInt(1));
+		         String employee_name = rs.getString(2);
+		         String gender = rs.getString(3);
+		         LocalDate date_of_birth = rs.getDate(4).toLocalDate();
+		         String department_id = rs.getString(5);
+		         String address = rs.getString(6);
+		         String phone = rs.getString(7);
+		         String password = rs.getString(9);
+		         employee=new Employee(employee_id, employee_name, gender, date_of_birth, department_id, address, phone, email, password);
+		     }
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		return employee;
+		
+	}
 }

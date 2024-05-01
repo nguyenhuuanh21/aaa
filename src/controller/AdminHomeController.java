@@ -2,28 +2,36 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import connection.connectDepartment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.AnchorPane;
+import model.Department;
+import model.Employee;
 
 public class AdminHomeController extends Controller implements Initializable{
-
+		Employee loggedInEmployee;
 
 	    @FXML
 	    LineChart<String, Number> myLineChart = new LineChart<>(new CategoryAxis(), new NumberAxis());
 	    
 	    @FXML
 	    private PieChart myPieChart;
-
+	    @FXML
+	    private AnchorPane accountPane;
 	    
 	    @FXML
 	    private void inLineChart() {
@@ -86,19 +94,21 @@ public class AdminHomeController extends Controller implements Initializable{
 		 }
     
     private void inPieChart() {
-		ObservableList<PieChart.Data> pieCharData = FXCollections.observableArrayList(
-				new PieChart.Data("1",20),
-				new PieChart.Data("2",5),
-				new PieChart.Data("3",15),
-				new PieChart.Data("4",35),
-				new PieChart.Data("5",25)
-				);
+    	 List<Department> list = connectDepartment.readDepartment();
+    	    ObservableList<PieChart.Data> pieCharData = FXCollections.observableArrayList();
+    	    
+    	    // Duyệt qua danh sách phòng ban và thêm dữ liệu vào PieChart
+    	    for (Department department : list) {
+    	        pieCharData.add(new PieChart.Data(department.getDepartment_name(), department.getDpartment_quanity()));
+    	    }
 		myPieChart.setData(pieCharData);
 		if(myPieChart == null) {
 			System.out.println("Pie chart is null");
 		}
 	}
     
+    
+  
 
  
 

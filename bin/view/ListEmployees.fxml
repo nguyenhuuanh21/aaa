@@ -59,7 +59,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Button>
-            <Button fx:id="menu_setting" layoutX="10.0" layoutY="536.0" mnemonicParsing="false" onAction="#adminSetting" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="SETTING" textFill="#5e7ff1">
+            <Button fx:id="menu_setting" layoutX="10.0" layoutY="536.0" mnemonicParsing="false" onAction="#setting" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="SETTING" textFill="#5e7ff1">
                <graphic>
                   <FontAwesomeIcon fill="#5e7ff1" glyphName="ARCHIVE" size="25" text="" />
                </graphic>

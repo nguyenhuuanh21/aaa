@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+<<<<<<< HEAD
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -52,11 +53,39 @@ public class MyAccountController extends Controller  {
 
     @FXML
     private Label settingPassword;
-	@FXML
-    public void editProfile(ActionEvent event)throws IOException{
-    	super.setting(event);
-    }
+=======
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+
+public class MyAccountController extends Controller {
+	private Stage stage;
+	private AnchorPane root;
+	private Scene scene;
+>>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
+	@FXML
+	public void editProfile(ActionEvent event) {
+		stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+   	 try {
+				root = FXMLLoader.load(getClass().getResource("/view/Setting.fxml"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+       if(root == null) {
+       	System.out.println("Root is null");
+       	return;
+       }
+       scene = new Scene(root);
+       stage.setScene(scene);
+       stage.show();
+
+	}
+	
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
     	super.adminHome(event);

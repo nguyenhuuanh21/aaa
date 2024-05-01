@@ -1,20 +1,30 @@
 package controller;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+=======
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+>>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
 
-import connection.ConnectEmployee;
-import connection.connectDB;
+import connection.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+<<<<<<< HEAD
 import javafx.scene.Parent;
+=======
+import javafx.fxml.Initializable;
+>>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -23,12 +33,15 @@ import javafx.stage.Stage;
 
 import model.Employee;
 
-import connection.connectDB;
 
 
-
-public class LoginController {
+public class LoginController implements Initializable {
+	
+	 @FXML
+	private Label labelRote;
 	@FXML
+	 private ComboBox<String> rote;
+    @FXML
     private Button login_button;
 
     @FXML
@@ -52,7 +65,7 @@ public class LoginController {
     private Employee loggedInEmployee;
 
     @FXML
-    public void login(ActionEvent event) throws IOException {
+    public void login(ActionEvent event) throws IOException, SQLException {
         String email = login_email.getText();
         String password = login_password.getText();
         try {
@@ -68,6 +81,7 @@ public class LoginController {
                  login_warning_password.setText("Please type your password");
                  login_warning_password.setVisible(true);
 
+<<<<<<< HEAD
              }else {
             	 Employee acc=new Employee(email,password);
               	boolean successed=ConnectEmployee.getAccount( acc);
@@ -130,26 +144,63 @@ public class LoginController {
 				e.printStackTrace();
 			//}
 =======
+=======
+        if (email.isEmpty() && password.isEmpty()) {
+            login_warning_email.setText("Please type your email");
+            login_warning_password.setText("Please type your password");
+            login_warning_email.setVisible(true);
+            login_warning_password.setVisible(true);
+        } else if (email.isEmpty()) {
+            login_warning_email.setText("Please type your email");
+            login_warning_email.setVisible(true);
+        } else if (password.isEmpty()) {
+            login_warning_password.setText("Please type your password");
+            login_warning_password.setVisible(true);
+
+        }else if(rote.getValue() == null) {
+        	labelRote.setVisible(true);
+>>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
         }else if(email.equals("a") && password.equals("1")) {
         	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+            //root = FXMLLoader.load(getClass().getResource("/viewE/Home.fxml"));
             scene = new Scene(root);
             stage.setScene(scene);
-            stage.show();	
-        } else if(connectDB.checkAccount(email, password)) {
-        	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();	
->>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
+            stage.show();
+        } else {
+            Employee acc = new Employee(email, password);
+            boolean successed = ConnectEmployee.getAccount(acc);
+            if (successed) {
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } else {
+                login_warning_email.setText("Please type correct your email");
+                login_warning_password.setText("Please type correct your password");
+                login_warning_email.setVisible(true);
+                login_warning_password.setVisible(true);
+            }
         }
+<<<<<<< HEAD
 		*/
    }
    
+=======
+>>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
 
-    @FXML
-    public void toggleShowPassword(ActionEvent event) {
-        
     }
+    
+    public void showRote() {
+    	rote.getItems().add("Employee");
+    	rote.getItems().add("Admin");
+    }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		showRote();
+	}
+
 }

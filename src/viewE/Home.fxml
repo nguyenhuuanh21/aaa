@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllerE.Home">
+   <children>
+      <VBox alignment="CENTER" layoutX="-1.0" prefHeight="750.0" prefWidth="230.0" stylesheets="@styles.css">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" onAction="#HomeE" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="Home" textFill="#5e7ff1">
+               <graphic>
+                  <FontAwesomeIcon fill="#5e7ff1" glyphName="HOME" size="25" text="" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="menu_calendar" layoutX="10.0" layoutY="568.0" mnemonicParsing="false" onAction="#calendarE" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="CLAENDAR" textFill="#5e7ff1">
+               <graphic>
+                  <FontAwesomeIcon fill="#5e7ff1" glyphName="CALENDAR" size="25" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="10.0" layoutY="474.0" mnemonicParsing="false" onAction="#notificationE" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="Notification" textFill="#5e7ff1">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <FontAwesomeIcon fill="#5e7ff1" glyphName="BELL" size="25" />
+               </graphic>
+            </Button>
+            <Button layoutX="10.0" layoutY="536.0" mnemonicParsing="false" onAction="#MyAccountE" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="SETTING" textFill="#5e7ff1">
+               <graphic>
+                  <FontAwesomeIcon fill="#5e7ff1" glyphName="ARCHIVE" size="25" text="" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="10.0" layoutY="505.0" mnemonicParsing="false" onAction="#logout" prefHeight="62.0" prefWidth="250.0" styleClass="cs-button" stylesheets="@styles.css" text="LOGOUT" textFill="#5e7ff1">
+               <graphic>
+                  <FontAwesomeIcon fill="#5e7ff1" glyphName="SIGN_OUT" selectionEnd="0" size="25" />
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+         <styleClass>
+            <String fx:value="right-side-bo" />
+            <String fx:value="while-bg" />
+         </styleClass>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1176.0" styleClass="while-bg" stylesheets="@styles.css">
+         <children>
+            <Label alignment="CENTER" prefHeight="56.0" prefWidth="251.0" text="DASHBOARD" textFill="#5e7ff1">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="62.0" prefWidth="514.0" />
+            <Label alignment="CENTER" prefHeight="43.0" prefWidth="286.0" text="HELLO : " textFill="#5e7ff1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <FontAwesomeIcon fill="#5e7ff1" glyphName="USER" size="30" />
+         </children>
+      </HBox>
+      <AnchorPane layoutX="229.0" layoutY="54.0" prefHeight="696.0" prefWidth="950.0" />
+   </children>
+</AnchorPane>

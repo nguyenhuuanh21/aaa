@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
 
 public class Employee {
@@ -32,13 +32,13 @@ public class Employee {
 		this.email = email;
 		this.password = password;
 	}
-	public Employee(String id,String name, String gender, LocalDate date_of_birth, String department, String address, String phone,
+	public Employee(String id,String name, String gender, LocalDate dateOfBirth, String department, String address, String phone,
 			String email, String password) {
 		super();
 		this.id=id;
 		this.name = name;
 		this.gender = gender;
-		this.birth = date_of_birth;
+		this.birth = dateOfBirth;
 		this.department = department;
 		this.address = address;
 		this.phone = phone;

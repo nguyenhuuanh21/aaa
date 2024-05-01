@@ -3,17 +3,10 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-
-import connection.ConnectEmployee;
-import connection.connectDB;
-import connection.connectDepartment;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,13 +20,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import model.*;
-import connection.connectDB;
-import connection.connectDepartment;
-
 import model.Department;
 import model.Employee;
+import connection.ConnectEmployee;
+import connection.connectDepartment;
 
 public class AddAccountController extends Controller implements Initializable {
 
@@ -66,36 +56,22 @@ public class AddAccountController extends Controller implements Initializable {
 
     @FXML
     private ImageView addImage;
-    
+
     @FXML
     private void showGender() {
-    	addGender.getItems().add("Male");
-    	addGender.getItems().add("Female");
+        addGender.getItems().addAll("Male", "Female");
     }
-    /*
-   @FXML
-    private void showDepartment() throws ClassNotFoundException, SQLException {
-    	ArrayList<Department> list = connectDepartment.getDepartment();
-    	String[] name = new String[list.size()];
-    	for(int i = 0 ;i < list.size();i++)
-    		name[i] = list.get(i).getDepartment_name();
-    	
-    	addDepartment.getItems().addAll(name);
-   }
-   */
+
     @FXML
-    private void showDepartment() {
-    	List<Department> departments = connectDepartment.readDepartment();
-    	String []id=new String[departments.size()+1];
-    	for(int i=0;i<departments.size();i++) {
-    		id[i]=departments.get(i).getDepartment_id();
-    		addDepartment.getItems().addAll(id);
-    	}
+    private void showDepartment() throws SQLException {
+        List<Department> departments = connectDepartment.readDepartment();
+        List<String> departmentNames = new ArrayList<>();
+        for (Department department : departments) {
+            departmentNames.add(department.getDepartment_name());
+        }
+        addDepartment.getItems().addAll(departmentNames);
     }
-    
-   
-   
-   
+
     @FXML
     public void insertImage() {
         FileChooser fileChooser = new FileChooser();
@@ -128,6 +104,7 @@ public class AddAccountController extends Controller implements Initializable {
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
                     Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+<<<<<<< HEAD
                     Employee employee=new Employee(addName.getText(),addGender.getValue(),addBirth.getValue(),
                     		addDepartment.getValue(),addAddress.getText(),addPhone.getText(),addEmail.getText(),addPassword.getText());
                     int n=ConnectEmployee.addEmployee(employee);
@@ -138,30 +115,24 @@ public class AddAccountController extends Controller implements Initializable {
                         connectDepartment.updateQuantity();
                     }else {
                     	 System.out.println("No"); 
-                    }
-                	/*
-                    alert1.setContentText("Register successfully");
-                    System.out.println("Yes");
-                    
-                    alert1.showAndWait();
-                    */
-                    try {
-                        super.adminEmployees(event);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    }
-
-                	/*
 =======
-                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);              	               	
->>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
-                    alert1.setContentText("Register successfully");
-                    System.out.println("Yes");                  
-                    alert1.showAndWait();              
+                    Employee employee = new Employee(addName.getText(), addGender.getValue(), addBirth.getValue(),
+                            addDepartment.getValue(), addAddress.getText(), addPhone.getText(), addEmail.getText(),
+                            addPassword.getText());
+                    int n;
+                    try {
+                        n = ConnectEmployee.addEmployee(employee);
+                        if (n != 0) {
+                            alert1.setContentText("Register successfully");
+                            System.out.println("Yes");
+                            alert1.showAndWait();
+                        } else {
+                            System.out.println("No");
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+>>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
+                    }
                     try {
                         super.adminEmployees(event);
                     } catch (IOException e) {
@@ -171,7 +142,6 @@ public class AddAccountController extends Controller implements Initializable {
             });
         }
     }
-    */
 
     @FXML
     public void adminHome(ActionEvent event) throws IOException {
@@ -210,15 +180,11 @@ public class AddAccountController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        // TODO Auto-generated method stub
-
-    	try {
-			showDepartment();
-			showGender();
-		} catch (Exception ex) {
-			// TODO Auto-generated catch block
-			ex.printStackTrace();
-		}
-
+        try {
+            showDepartment();
+            showGender();
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
     }
 }

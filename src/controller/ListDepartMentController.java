@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+<<<<<<< HEAD
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -51,6 +52,14 @@ public class ListDepartMentController extends Controller implements  Initializab
     @FXML
     private Button menu_setting;
 
+=======
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
+
+public class ListDepartMentController extends Controller {
+	
+>>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
     	super.adminHome(event);

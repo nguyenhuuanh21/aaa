@@ -99,3 +99,19 @@
   -fx-font-size: 20px;
   -fx-cursor: hand;
 }
+
+/* Định dạng cho ImageView */
+.image-view {
+    -fx-background-color: gray; /* Màu nền xám */
+    -fx-border-color: black; /* Màu viền */
+    -fx-border-width: 2px; /* Độ rộng của viền */
+    -fx-border-radius: 50%; /* Làm cho viền trở thành hình tròn */
+    -fx-background-radius: 50%; /* Làm cho nền trở thành hình tròn */
+}
+
+/* Định dạng cho hình ảnh trong ImageView */
+.image-view > .image-view-content {
+    -fx-fit-width: 100%; /* Đảm bảo hình ảnh vừa với kích thước của ImageView */
+    -fx-fit-height: 100%;
+}
+

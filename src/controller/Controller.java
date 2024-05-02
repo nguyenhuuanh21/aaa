@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 public class Controller {
@@ -15,7 +17,14 @@ public class Controller {
 	private AnchorPane root;
 	private Scene scene;
 	
+	@FXML
+    private ImageView HelloImage;
+
+    @FXML
+    private Label HelloName;
+	
 	protected int id = LoginController.getID();
+	protected String name = LoginController.getName();
 
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
@@ -36,7 +45,9 @@ public class Controller {
         stage.setScene(scene);
         stage.show();
     }
-	
+	public void displayName() {
+    	HelloName.setText("Hello : " + name);
+    }
 	@FXML
     public void setting(ActionEvent event)throws IOException{
     	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();

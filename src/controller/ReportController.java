@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 public class ReportController extends Controller implements Initializable {
 
@@ -45,6 +46,7 @@ public class ReportController extends Controller implements Initializable {
             label.setAlignment(Pos.TOP_LEFT);
             label.setPrefWidth(labelWidth);
             label.setPrefHeight(labelHeight);
+            label.setFont(new Font(16));
             label.setWrapText(true); 
             label.setStyle("-fx-padding: 5;");
             report.getChildren().add(label);

@@ -37,6 +37,25 @@ public class ConnectEmployee {
         return n;
     }
     
+    public static String getName(int id) throws SQLException {
+        String name = null;
+        Connection conn = ConnectDB.getConnection(ConnectionType.MYSQL);
+        ResultSet rs;
+        try (conn) {
+            String sql = "SELECT employee_name FROM Employee WHERE employee_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                name = rs.getString("employee_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+
+    
     public static int getId(Employee employee) throws SQLException {
         Connection conn = ConnectDB.getConnection(ConnectionType.MYSQL);
         ResultSet rs;

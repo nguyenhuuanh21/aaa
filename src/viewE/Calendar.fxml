@@ -4,6 +4,7 @@
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
@@ -70,12 +71,16 @@
                </font>
             </Label>
             <Pane prefHeight="62.0" prefWidth="514.0" />
-            <Label alignment="CENTER" prefHeight="43.0" prefWidth="286.0" text="HELLO : " textFill="#5e7ff1">
+            <Label fx:id="HelloName" alignment="CENTER" prefHeight="43.0" prefWidth="286.0" text="HELLO : " textFill="#5e7ff1">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <FontAwesomeIcon fill="#5e7ff1" glyphName="USER" size="30" />
+            <AnchorPane prefHeight="50.0" prefWidth="55.0" style="-fx-border-color: gray;">
+               <children>
+                  <ImageView fx:id="HelloImage" fitHeight="43.0" fitWidth="55.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
          </children>
       </HBox>
       <AnchorPane layoutX="239.0" layoutY="62.0" prefHeight="678.0" prefWidth="953.0" style="-fx-background-color: white;">

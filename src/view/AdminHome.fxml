@@ -155,7 +155,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" styleClass="cs1-button" text="View" textFill="#5e7ff1" />
+                                          <Button mnemonicParsing="false" onAction="#adminEmployees" prefHeight="33.0" prefWidth="113.0" styleClass="cs1-button" text="View" textFill="#5e7ff1" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="178.0" prefWidth="324.0" styleClass="while-bg" stylesheets="@styles.css">
@@ -170,7 +170,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" styleClass="cs1-button" stylesheets="@styles.css" text="View" textFill="#5e7ff1" />
+                                          <Button mnemonicParsing="false" onAction="#adminDepartment" prefHeight="33.0" prefWidth="113.0" styleClass="cs1-button" stylesheets="@styles.css" text="View" textFill="#5e7ff1" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" layoutX="352.0" layoutY="10.0" prefHeight="178.0" prefWidth="287.0" styleClass="while-bg" stylesheets="@styles.css">
@@ -185,7 +185,7 @@
                                                 <Font name="System Bold" size="20.0" />
                                              </font>
                                           </Label>
-                                          <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" styleClass="cs1-button" stylesheets="@styles.css" text="View" textFill="#5e7ff1" />
+                                          <Button mnemonicParsing="false" onAction="#calendar" prefHeight="33.0" prefWidth="113.0" styleClass="cs1-button" stylesheets="@styles.css" text="View" textFill="#5e7ff1" />
                                        </children>
                                     </VBox>
                                  </children>

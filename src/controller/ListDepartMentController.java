@@ -1,14 +1,17 @@
 package controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 
-public class ListDepartMentController extends Controller {
+public class ListDepartMentController extends Controller implements Initializable {
 	
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
@@ -45,6 +48,13 @@ public class ListDepartMentController extends Controller {
 	    public void logout(ActionEvent event)throws IOException {
 	    	super.logout(event);
 	 }
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		displayName();
+	}
 
 
 }

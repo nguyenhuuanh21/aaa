@@ -94,5 +94,6 @@ public class ReportController extends Controller implements Initializable {
         // Initialize totalPage here based on the total number of reports
         //totalPage = getTotalPageCount(); // You need to implement this method
         display(currentPage);
+        displayName();
     }
 }

@@ -125,7 +125,7 @@ public class ListEmployeeController extends Controller implements Initializable 
     }
 
     public void setting(ActionEvent event) throws IOException {
-        super.setting(event);
+        super.adminMyAccount(event);
     }
 
     public void logout(ActionEvent event) throws IOException {
@@ -143,6 +143,7 @@ public class ListEmployeeController extends Controller implements Initializable 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
+        	displayName();
             display();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

@@ -104,6 +104,7 @@ public class AdminHomeController extends Controller implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		displayName();
 		// TODO Auto-generated method stub
 		inLineChart();
 		inPieChart();

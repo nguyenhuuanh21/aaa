@@ -125,6 +125,7 @@ public class MyAccountController extends Controller implements Initializable{
 		// TODO Auto-generated method stub
 		try {
 			display();
+			displayName();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

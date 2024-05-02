@@ -93,3 +93,9 @@
     -fx-background-insets: 0.0, 0.0, 1.0, 2.0;
     -fx-background-radius: 0.0, 0.0, 0.0, 0.0;
 }
+
+.delete-icon, .edit-icon {
+  -fx-font-family: "FontAwesome";
+  -fx-font-size: 20px;
+  -fx-cursor: hand;
+}

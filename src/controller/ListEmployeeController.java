@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.List;
 import connection.ConnectEmployee;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -54,7 +56,7 @@ public class ListEmployeeController extends Controller implements Initializable 
     private TableView<Employee> tableView;
 
     public void display() throws ClassNotFoundException, SQLException {
-        List<Employee> list = ConnectEmployee.readEmployee();
+        List<Employee> list = ConnectEmployee.readEmployees();
 
         // Create an ObservableList from the list
         ObservableList<Employee> employeeList = FXCollections.observableArrayList(list);
@@ -82,23 +84,22 @@ public class ListEmployeeController extends Controller implements Initializable 
                         setGraphic(null);
                         setText(null);
                     } else {
-                        ImageView deleteIcon = new ImageView(new Image("/image/trash.jpg"));
-                        ImageView editIcon = new ImageView(new Image("/image/pencil.jpg"));
-
-                        deleteIcon.setStyle("-fx-cursor: hand;" + "-glyph-size: 28px;");
-                        editIcon.setStyle("-fx-cursor: hand;" + "-glyph-size: 28px;");
-                        deleteIcon.setOnMouseClicked((MouseEvent event) -> {
-                            //Employee employee = getTableView().getItems().get(getIndex());
+                        Button deleteButton = new Button("B");
+                        Button editButton = new Button("A");
+                        deleteButton.setOnAction(event -> {
+                            Employee employee = getTableView().getItems().get(getIndex());
                             // Implement delete functionality here
+                            System.out.println("Delete employee: " + employee.getName());
                         });
-                        editIcon.setOnMouseClicked((MouseEvent event) -> {
-                            
+                        editButton.setOnAction(event -> {
+                            Employee employee = getTableView().getItems().get(getIndex());
+                            // Implement edit functionality here
+                            System.out.println("Edit employee: " + employee.getName());
                         });
-
-                        HBox manageBtn = new HBox(editIcon, deleteIcon);
+                        HBox manageBtn = new HBox(editButton, deleteButton);
                         manageBtn.setStyle("-fx-alignment: center");
-                        HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
-                        HBox.setMargin(editIcon, new Insets(2, 3, 0, 2));
+                        HBox.setMargin(deleteButton, new Insets(2, 2, 0, 3));
+                        HBox.setMargin(editButton, new Insets(2, 3, 0, 2));
 
                         setGraphic(manageBtn);
                         setText(null);
@@ -118,23 +119,23 @@ public class ListEmployeeController extends Controller implements Initializable 
     public void adminEmployees(ActionEvent event) throws IOException {
         super.adminEmployees(event);
     }
-    
+
     public void adminDepartment(ActionEvent event) throws IOException {
         super.adminDepartment(event);
     }
-    
+
     public void setting(ActionEvent event) throws IOException {
         super.setting(event);
     }
-    
+
     public void logout(ActionEvent event) throws IOException {
         super.logout(event);
     }
-    
+
     public void calendar(ActionEvent event) throws IOException {
         super.calendar(event);
     }
-    
+
     public void adminReport(ActionEvent event) throws IOException {
         super.adminReport(event);
     }

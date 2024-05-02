@@ -10,18 +10,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 public class Controller {
 	private Stage stage;
 	private AnchorPane root;
 	private Scene scene;
 	
-	
-	
+	protected int id = LoginController.getID();
+
 	@FXML
     public void adminHome(ActionEvent event)throws IOException{
     	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
     	 try {
+    		 System.out.println(id);
 				root = FXMLLoader.load(getClass().getResource("/view/adminHome.fxml"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -209,4 +209,6 @@ public class Controller {
 	             }
 	         });
 	 }
+
+	
 }

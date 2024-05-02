@@ -1,26 +1,26 @@
 package controller;
 
 import java.io.IOException;
-<<<<<<< HEAD
+
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-=======
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
->>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
+
 
 import connection.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-<<<<<<< HEAD
+
 import javafx.scene.Parent;
-=======
+
 import javafx.fxml.Initializable;
->>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -81,7 +81,7 @@ public class LoginController implements Initializable {
                  login_warning_password.setText("Please type your password");
                  login_warning_password.setVisible(true);
 
-<<<<<<< HEAD
+
              }else {
             	 Employee acc=new Employee(email,password);
               	boolean successed=ConnectEmployee.getAccount( acc);
@@ -187,10 +187,8 @@ public class LoginController implements Initializable {
 		*/
    }
    
-=======
->>>>>>> c8632315fe63e56ccec33498861616795dd76c6e
 
-    }
+    
     
     public void showRote() {
     	rote.getItems().add("Employee");

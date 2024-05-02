@@ -11,7 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class Controller {
+public class controller {
 	private Stage stage;
 	private AnchorPane root;
 	private Scene scene;

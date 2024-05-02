@@ -4,33 +4,33 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectDB {
-    static final String MYSQL_DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
-    static final String MYSQL_DB_URL = "jdbc:mysql://localhost:3306/quan_ly_nhan_su";
-    static final String MYSQL_USER = "root";
-    static final String MYSQL_PASS = "";
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+
+public class connectDB {
+
     
-    static final String SQL_SERVER_DRIVER_CLASS = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-    static final String SQL_SERVER_DB_URL = "jdbc:sqlserver://LAPTOP-0M51BIGT\\SQLEXPRESS:1433;databaseName=student_management";
-    static final String SQL_SERVER_USER = "sa";
-    static final String SQL_SERVER_PASS = "anhkk123";
-    
-    public static Connection getConnection(ConnectionType connectionType) throws SQLException {
+    public static Connection getConnection() {
+        var server = "LAPTOP-0M51BIGT\\SQLEXPRESS";
+        var user = "sa";
+        var password = "anhkk123";
+        var db = "student_management";
+        var port = 1433;
+        SQLServerDataSource ds = new SQLServerDataSource();
+        ds.setUser(user);
+        ds.setPassword(password);
+        ds.setDatabaseName(db);
+        ds.setServerName(server);
+        ds.setPortNumber(port);
+        ds.setEncrypt(false);
+        Connection conn = null;
         try {
-            switch (connectionType) {
-                case MYSQL:
-                    Class.forName(MYSQL_DRIVER_CLASS);
-                    return DriverManager.getConnection(MYSQL_DB_URL, MYSQL_USER, MYSQL_PASS);
-                case SQL_SERVER:
-                    Class.forName(SQL_SERVER_DRIVER_CLASS);
-                    return DriverManager.getConnection(SQL_SERVER_DB_URL, SQL_SERVER_USER, SQL_SERVER_PASS);
-                default:
-                    throw new IllegalArgumentException("Invalid connection type");
-            }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            conn = ds.getConnection();
+            System.out.println("Kết nối với SQL Server thành công!");
+            System.out.println(conn.getCatalog());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
-        return null;
+        return conn;
     }
     
     public enum ConnectionType {

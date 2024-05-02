@@ -12,4 +12,6 @@ module AAA {
 	opens connection to javafx.graphics,javafx.fxml;
 	opens model to javafx.graphics,javafx.fxml,javafx.base;
 	opens controllerE to javafx.graphics,javafx.fxml,javafx.base;
+
+	opens image to javafx.graphics,javafx.fxml,javafx.base;
 }

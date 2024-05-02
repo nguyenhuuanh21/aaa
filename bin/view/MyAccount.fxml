@@ -232,7 +232,7 @@
                   <ImageView fitHeight="152.0" fitWidth="153.0" layoutX="-3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
-            <Label alignment="CENTER" layoutX="55.0" layoutY="213.0" prefHeight="30.0" prefWidth="114.0" text="ID : " />
+            <Label fx:id="myID" alignment="CENTER" layoutX="55.0" layoutY="213.0" prefHeight="30.0" prefWidth="114.0" text="ID : " />
             <Button layoutX="447.0" layoutY="633.0" mnemonicParsing="false" onAction="#editProfile" prefHeight="30.0" prefWidth="114.0" style="-fx-border-color: gray;" styleClass="cs-button" stylesheets="@styles.css" text="Edit Profiles" />
          </children></AnchorPane>
    </children>

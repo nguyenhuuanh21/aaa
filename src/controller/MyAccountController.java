@@ -24,6 +24,10 @@ public class MyAccountController extends Controller implements Initializable{
 	private AnchorPane root;
 	private Scene scene;
 	
+	@FXML
+	private Label myID;
+	
+	
 	 @FXML
 	    private Label address;
 
@@ -77,6 +81,7 @@ public class MyAccountController extends Controller implements Initializable{
 		gender.setText(em.getGender());
 		birth.setText(em.getBirth().toString());
 		address.setText(em.getAddress());
+		myID.setText("ID : " + id);
 	}
 	
 	@FXML

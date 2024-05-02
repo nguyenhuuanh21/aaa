@@ -102,12 +102,12 @@
                </font>
             </Label>
             <VBox fx:id="report" layoutX="80.0" layoutY="71.0" prefHeight="481.0" prefWidth="810.0" />
-            <TextField layoutX="97.0" layoutY="604.0" prefHeight="50.0" prefWidth="629.0" promptText="send notification" styleClass="bellow-bor" stylesheets="@styles.css">
+            <TextField fx:id="textReport" layoutX="97.0" layoutY="604.0" prefHeight="50.0" prefWidth="629.0" promptText="send notification" styleClass="bellow-bor" stylesheets="@styles.css">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Button layoutX="766.0" layoutY="604.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="95.0" style="-fx-border-color: gray;" styleClass="cs-button" stylesheets="@styles.css">
+            <Button fx:id="btnSend" layoutX="766.0" layoutY="604.0" mnemonicParsing="false" onAction="#sendReport" prefHeight="50.0" prefWidth="95.0" style="-fx-border-color: gray;" styleClass="cs-button" stylesheets="@styles.css">
                <graphic>
                   <FontAwesomeIcon fill="GREY" glyphName="SHARE" size="3em" />
                </graphic>

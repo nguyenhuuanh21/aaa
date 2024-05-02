@@ -1,6 +1,7 @@
 package controllerE;
 import java.io.IOException;
 
+import controller.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,7 @@ public class controller {
 	private Stage stage;
 	private AnchorPane root;
 	private Scene scene;
-
+	protected int id = LoginController.getID();
 	@FXML
     public void edit(ActionEvent event)throws IOException{
     	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();

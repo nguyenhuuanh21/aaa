@@ -33,10 +33,25 @@ public class connectDepartment {
 	        }
 	        return departments;
 	    }
-	 public static void updateQuantity() {
+	 public static void updateQuantityEmployee() {
 			Connection conn =connectDB.getConnection();
 			try (conn) {
-	            var sql = "UPDATE pb SET pb.department_quantity = nv.department_count FROM departments AS pb INNER JOIN ( SELECT department_id, COUNT(*) AS department_count FROM Employee GROUP BY department_id ) AS nv ON pb.department_id = nv.department_id;"; // câu lệnh truy vấn SQL
+	            var sql = "UPDATE pb \r\n"
+	            		+ "SET pb.department_quantity = nv.department_count \r\n"
+	            		+ "FROM departments AS pb \r\n"
+	            		+ "INNER JOIN (\r\n"
+	            		+ "    SELECT department_id, SUM(department_count) AS department_count \r\n"
+	            		+ "    FROM (\r\n"
+	            		+ "        SELECT department_id, COUNT(*) AS department_count \r\n"
+	            		+ "        FROM Employee \r\n"
+	            		+ "        GROUP BY department_id \r\n"
+	            		+ "        UNION ALL \r\n"
+	            		+ "        SELECT department_id, COUNT(*) AS department_count \r\n"
+	            		+ "        FROM Admin \r\n"
+	            		+ "        GROUP BY department_id \r\n"
+	            		+ "    ) AS combined\r\n"
+	            		+ "    GROUP BY department_id\r\n"
+	            		+ ") AS nv ON pb.department_id = nv.department_id;"; // câu lệnh truy vấn SQL
 	            var statement = conn.createStatement(); // lấy đối tượng Statement
 	            var resultSet = statement.executeUpdate(sql); // lấy đối tượng ResultSet
 	        } catch (SQLServerException throwables) {
@@ -46,6 +61,7 @@ public class connectDepartment {
 	        }
 			
 		}
+	
 }
 
 

@@ -1,10 +1,10 @@
 package controllerE;
 
 import java.io.IOException;
-
+import controllerE.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-public class Home extends Controller  {
+public class Home extends controller  {
 	@FXML
     public void HomeE(ActionEvent event)throws IOException {
     	super.HomeE(event);

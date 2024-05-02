@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-public class Calendar extends Controller implements Initializable  {
+public class Calendar extends controller  implements Initializable  {
 	
 	ZonedDateTime dateFocus;
     ZonedDateTime today;

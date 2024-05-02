@@ -2,19 +2,50 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import connection.connectReport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import model.Report;
 
 
 public class ReportController extends Controller implements Initializable{
-	
-	@FXML
-	private VBox report;
+
+    @FXML
+    private Button btnSend;
+
+    @FXML
+    private Button buttonHome;
+
+    @FXML
+    private Button menu_calendar;
+
+    @FXML
+    private Button menu_department;
+
+    @FXML
+    private Button menu_edit;
+
+    @FXML
+    private Button menu_logout;
+
+    @FXML
+    private Button menu_setting;
+
+    @FXML
+    private VBox report;
+
+    @FXML
+    private TextField textReport;
+
 	
 	@FXML
 	private int currentPage = 1;
@@ -84,7 +115,18 @@ public class ReportController extends Controller implements Initializable{
 	    public void logout(ActionEvent event)throws IOException {
 	    	super.logout(event);
 	 }
-
+	 @FXML
+	    public void sendReport(ActionEvent event)throws IOException {
+		 LocalTime currentTime = LocalTime.now();
+		 LocalDate currentDate = LocalDate.now();
+		 Report report=new Report(id,currentTime,currentDate,textReport.getText());
+		 int n=connectReport.addReport(report);
+		 if(n>0) {
+			  System.out.println("Yes");
+		 }else {
+			  System.out.println("No" );
+		 }
+	    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

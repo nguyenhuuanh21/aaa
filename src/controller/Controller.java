@@ -22,7 +22,7 @@ public class Controller {
     	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
     	 try {
     		 System.out.println(id);
-				root = FXMLLoader.load(getClass().getResource("/view/adminHome.fxml"));
+				root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -9,7 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-public class Notification extends Controller implements Initializable {
+public class Notification extends controller implements Initializable {
 	
 	@FXML
 	private VBox report;

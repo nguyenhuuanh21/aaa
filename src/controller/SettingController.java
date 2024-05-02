@@ -3,8 +3,12 @@ package controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import connection.ConnectEmployee;
+import connection.connectDepartment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +23,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Department;
+import model.Employee;
 
 
 public class SettingController extends Controller implements Initializable {
@@ -126,6 +132,16 @@ public class SettingController extends Controller implements Initializable {
          alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
          alert.showAndWait().ifPresent(response -> {
              if (response == ButtonType.OK) {
+            	 Employee employee=new Employee(settingName.getText(),settingGender.getValue(),SettingBirth.getValue(),
+            			 settingDepartment.getValue(),settingAddress.getText(),SettingPhone.getText(),settingEmail.getText(),settingPassword.getText());
+            	 int n=ConnectEmployee.updateAdminById(id, employee);
+            	 if(n!=0) {
+            		
+            		 connectDepartment.updateQuantityEmployee();
+            		 System.out.println("yes");
+            	 }else {
+            		 System.out.println("no");
+            	 }
             	 try {
 					super.adminMyAccount(event);
 				} catch (IOException e) {
@@ -135,11 +151,43 @@ public class SettingController extends Controller implements Initializable {
              }
          });
 	 }
-
-
+	 @FXML
+	    private void showGender() {
+		  settingGender.getItems().add("Male");
+		  settingGender.getItems().add("Female");
+	    }
+	  @FXML
+	    private void showDepartment() {
+	    	List<Department> departments = connectDepartment.readDepartment();
+	    	String []id=new String[departments.size()+1];
+	    	for(int i=0;i<departments.size();i++) {
+	    		id[i]=departments.get(i).getDepartment_id();
+	    		settingDepartment.getItems().addAll(id);
+	    	}
+	    }
+	  public void display() throws SQLException {
+		 	
+			Employee em = ConnectEmployee.readAdById(id);
+			
+			settingName.setText(em.getName());
+			SettingPhone.setText(em.getPhone());
+			settingPassword.setText(em.getPassword());
+			settingEmail.setText(em.getEmail());
+			settingDepartment.setValue(em.getDepartment());
+			settingGender.setValue(em.getGender());
+			SettingBirth.setValue(em.getBirth());
+			settingAddress.setText(em.getAddress());
+		}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
+		try {
+			showGender();
+			showDepartment();
+			display();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }

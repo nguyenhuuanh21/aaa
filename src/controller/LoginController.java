@@ -32,7 +32,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import model.Employee;
-
+import connection.ConnectEmployee;
 
 
 public class LoginController  implements Initializable {
@@ -62,15 +62,15 @@ public class LoginController  implements Initializable {
     private Stage stage;
     private AnchorPane root;
     private Scene scene;
-<<<<<<< HEAD
+
     private Employee loggedInEmployee;
-=======
+
     
     private static int ID;
     public static int getID() {
     	return ID;
     }
->>>>>>> b6599124cc9e14729901aff54abd0b19b587e1f6
+
 
     @FXML
     public void login(ActionEvent event) throws IOException, SQLException {
@@ -88,17 +88,19 @@ public class LoginController  implements Initializable {
              } else if (password.isEmpty()) {
                  login_warning_password.setText("Please type your password");
                  login_warning_password.setVisible(true);
-
-
-             }else {
+             }
+             else if(rote.getValue() == null) {
+                 	labelRote.setVisible(true);
+                 
+             }else if(rote.getValue()=="Employee") {
             	 Employee acc=new Employee(email,password);
               	boolean successed=ConnectEmployee.getAccount( acc);
               	if(successed) {
-              		
+              			ID=ConnectEmployee.getIdByAccount(acc);
                 		login_warning_email.setVisible(false);
         	            login_warning_password.setVisible(false);
         	            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        	            root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+        	            root = FXMLLoader.load(getClass().getResource("/viewE/Home.fxml"));
         	            scene = new Scene(root);
         	            stage.setScene(scene);
         	            stage.show();		
@@ -109,9 +111,27 @@ public class LoginController  implements Initializable {
      		         login_warning_email.setVisible(true);
      		         login_warning_password.setVisible(true);
              	}
+             }else if(rote.getValue()=="Admin") {
+            	 Employee acc=new Employee(email,password);
+               	boolean successed=ConnectEmployee.getAccountAD(acc);
+               	if(successed) {
+               			ID=ConnectEmployee.getIdByAccountAD(acc);
+                 		login_warning_email.setVisible(false);
+         	            login_warning_password.setVisible(false);
+         	            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+         	            root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
+         	            scene = new Scene(root);
+         	            stage.setScene(scene);
+         	            stage.show();		
+              	      
+              	}else {
+              		 login_warning_email.setText("Please type correct your email");
+      		         login_warning_password.setText("Please type correct your password");
+      		         login_warning_email.setVisible(true);
+      		         login_warning_password.setVisible(true);
+              	}
              }
         } catch (Exception e) {
-            // Xử lý ngoại lệ được ném trong quá trình đăng nhập
             if (e instanceof InvocationTargetException) {
                 Throwable targetException = ((InvocationTargetException) e).getTargetException();
                 targetException.printStackTrace();

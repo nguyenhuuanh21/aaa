@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.List;
 import connection.ConnectEmployee;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -56,7 +56,7 @@ public class ListEmployeeController extends Controller implements Initializable 
     private TableView<Employee> tableView;
 
     public void display() throws ClassNotFoundException, SQLException {
-        List<Employee> list = ConnectEmployee.readEmployees();
+        List<Employee> list = ConnectEmployee.readEmployee();
 
         // Create an ObservableList from the list
         ObservableList<Employee> employeeList = FXCollections.observableArrayList(list);

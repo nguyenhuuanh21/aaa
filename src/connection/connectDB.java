@@ -4,18 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-<<<<<<< HEAD
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 
 public class connectDB {
 
-=======
-public class ConnectDB {
-    static final String MYSQL_DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
-    static final String MYSQL_DB_URL = "jdbc:mysql://localhost:3306/database";
-    static final String MYSQL_USER = "root";
-    static final String MYSQL_PASS = "";
->>>>>>> b6599124cc9e14729901aff54abd0b19b587e1f6
+
+
     
     public static Connection getConnection() {
         var server = "LAPTOP-0M51BIGT\\SQLEXPRESS";

@@ -110,11 +110,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-
-                        <Label fx:id="settingName" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" textFill="GREY">
-
-                        <Label fx:id="name" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
-
+                        <Label fx:id="settingName" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -128,11 +124,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-
-                        <Label fx:id="settingGender" prefHeight="49.0" prefWidth="396.0" styleClass="bellow-bor" stylesheets="@styles.css">
-
-                        <Label fx:id="gender" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
-
+                        <Label fx:id="settingGender" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -146,11 +138,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-<<<<<<< HEAD
-                        <Label fx:id="SettingBirth" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" textFill="#0f0202">
-=======
-                        <Label fx:id="birth" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
->>>>>>> b6599124cc9e14729901aff54abd0b19b587e1f6
+                        <Label fx:id="SettingBirth" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -164,11 +152,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-<<<<<<< HEAD
-                        <Label fx:id="settingDepartment" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" textFill="GREY">
-=======
-                        <Label fx:id="department" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
->>>>>>> b6599124cc9e14729901aff54abd0b19b587e1f6
+                        <Label fx:id="settingDepartment" layoutX="352.0" layoutY="10.0" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -187,11 +171,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-<<<<<<< HEAD
-                        <Label fx:id="settingAddress" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" textFill="GREY">
-=======
-                        <Label fx:id="address" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
->>>>>>> b6599124cc9e14729901aff54abd0b19b587e1f6
+                        <Label fx:id="settingAddress" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -205,11 +185,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-
-                        <Label fx:id="SettingPhone" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" textFill="GREY">
-
-                        <Label fx:id="phone" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
-
+                        <Label fx:id="SettingPhone" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -228,11 +204,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-
-                        <Label fx:id="settingEmail" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" textFill="GREY">
-
-                        <Label fx:id="email" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
-
+                        <Label fx:id="settingEmail" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -246,11 +218,7 @@
                               <Font size="20.0" />
                            </font>
                         </Label>
-
-                        <Label fx:id="settingPassword" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" textFill="GREY">
-
-                        <Label fx:id="password" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
-
+                        <Label fx:id="settingPassword" prefHeight="53.0" prefWidth="394.0" styleClass="bellow-bor" stylesheets="@styles.css" text="Label" textFill="GREY">
                            <font>
                               <Font size="20.0" />
                            </font>

@@ -84,8 +84,8 @@ public class ListEmployeeController extends Controller implements Initializable 
                         setGraphic(null);
                         setText(null);
                     } else {
-                        Button deleteButton = new Button("B");
-                        Button editButton = new Button("A");
+                        Button deleteButton = new Button("del");
+                        Button editButton = new Button("edit");
                         deleteButton.setOnAction(event -> {
                             Employee employee = getTableView().getItems().get(getIndex());
                             // Implement delete functionality here

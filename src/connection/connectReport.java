@@ -8,14 +8,13 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
-
+import connection.connectDB.ConnectionType;
 import model.Department;
 import model.Report;
 
 public class connectReport {
 	public static int addReport(Report report) {
-		var conn=connectDB.getConnection();
+		var conn=connectDB.getConnection(ConnectionType.MYSQL);
 		try(conn) {
 			String sql="INSERT INTO report(employee_id, report_time, report_date, report_content)"
              		+ " values(?,?,?,?)";
@@ -29,17 +28,14 @@ public class connectReport {
              ps.setDate(3, (java.sql.Date) sqlDate);
              ps.setString(4,report.getContent());
              return ps.executeUpdate();
-		}catch (SQLServerException throwables) {
+		}catch (SQLException throwables) {
             throwables.printStackTrace();
             return -1;
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            return -1;
-        }
+        } 
 	}
 	public static List<Report> readReport() {
         List<Report> reports = new ArrayList<>();		       
-        Connection conn =connectDB.getConnection();
+        Connection conn =connectDB.getConnection(ConnectionType.MYSQL);
         try (conn) {
             var sql = "SELECT * FROM dbo.report ORDER BY report_id ASC "; // câu lệnh truy vấn SQL
             var statement = conn.createStatement(); // lấy đối tượng Statement
@@ -53,11 +49,9 @@ public class connectReport {
                 Report report = new Report(report_id,employee_id,report_time,report_date,report_content);
                 reports.add(report); 
             }
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        } 
         return reports;
     }
 }

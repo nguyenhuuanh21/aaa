@@ -1,40 +1,44 @@
 package connection;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
-
 public class connectDB {
-
-
-
-    
-    public static Connection getConnection() {
-        var server = "LAPTOP-0M51BIGT\\SQLEXPRESS";
-        var user = "sa";
-        var password = "anhkk123";
-        var db = "student_management";
-        var port = 1433;
-        SQLServerDataSource ds = new SQLServerDataSource();
-        ds.setUser(user);
-        ds.setPassword(password);
-        ds.setDatabaseName(db);
-        ds.setServerName(server);
-        ds.setPortNumber(port);
-        ds.setEncrypt(false);
-        Connection conn = null;
-        try {
-            conn = ds.getConnection();
-            System.out.println("Kết nối với SQL Server thành công!");
-            System.out.println(conn.getCatalog());
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    public static Connection getConnection(ConnectionType type) {
+        switch (type) {
+            case MYSQL:
+                return getMySQLConnection();
+            case SQL_SERVER:
+                return getSQLServerConnection();
+            default:
+                throw new IllegalArgumentException("Invalid connection type: " + type);
         }
-        return conn;
     }
-    
+
+    private static Connection getMySQLConnection() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://localhost:3306/database";
+            String user = "root";
+            String password = "";
+            return DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private static Connection getSQLServerConnection() {
+        try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            String url = "jdbc:sqlserver://LAPTOP-0M51BIGT\\SQLEXPRESS:1433;databaseName=student_management;user=sa;password=anhkk123";
+            return DriverManager.getConnection(url);
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public enum ConnectionType {
         MYSQL,
         SQL_SERVER

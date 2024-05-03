@@ -87,7 +87,7 @@ public class AddAccountController extends Controller implements Initializable {
    }
    */
     @FXML
-    private void showDepartment() {
+    private void showDepartment() throws SQLException {
     	List<Department> departments = connectDepartment.readDepartment();
     	String []id=new String[departments.size()+1];
     	for(int i=0;i<departments.size();i++) {
@@ -226,17 +226,5 @@ public class AddAccountController extends Controller implements Initializable {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
 		}
-
-/*
-        try {
-        	super.displayName();
-            showDepartment();
-            showGender();
-        } catch (SQLException ex){
-            ex.printStackTrace();
-        }
-
     }
-    */
-}
 }

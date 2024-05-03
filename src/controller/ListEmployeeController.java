@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.List;
 import connection.ConnectEmployee;
-
+import connection.connectDepartment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -88,8 +88,14 @@ public class ListEmployeeController extends Controller implements Initializable 
                         Button editButton = new Button("edit");
                         deleteButton.setOnAction(event -> {
                             Employee employee = getTableView().getItems().get(getIndex());
-                            // Implement delete functionality here
-                            System.out.println("Delete employee: " + employee.getName());
+                            int eId = Integer.parseInt(employee.getId());
+                            int n=ConnectEmployee.deleteEmployeeById(eId);
+                            if(n>0) {
+                            	System.out.println("Delete employee: " + employee.getName());
+                            	connectDepartment.updateQuantityEmployee();
+                            }else {
+                            	System.out.println("Delete employee failed ");
+                            }
                         });
                         editButton.setOnAction(event -> {
                             Employee employee = getTableView().getItems().get(getIndex());

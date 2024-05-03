@@ -18,13 +18,13 @@ public class Notification extends controller implements Initializable {
 	
 	@FXML
 	private VBox report;
-	 @FXML
-	    private Label hello;
 	@FXML
 	private int currentPage = 1;
 	@FXML
 	private int totalPage ;//số truy report / 5
-	
+    @FXML
+    private Label hello;
+
 	@FXML
 	private void previous(ActionEvent event) {
 		if(currentPage > 1) {

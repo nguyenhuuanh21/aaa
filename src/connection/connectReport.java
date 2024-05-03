@@ -17,7 +17,7 @@ public class connectReport {
 	public static int addReport(Report report) {
 		var conn=connectDB.getConnection();
 		try(conn) {
-			String sql="INSERT INTO report(employee_id, report_time, report_date, report_content)"
+			String sql="INSERT INTO report(admin_id, report_time, report_date, report_content)"
              		+ " values(?,?,?,?)";
 			 PreparedStatement ps=conn.prepareCall(sql);
              ps.setInt(1,report.getEmployeeID());

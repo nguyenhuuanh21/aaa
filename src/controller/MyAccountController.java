@@ -237,7 +237,8 @@ public class MyAccountController extends Controller implements Initializable{
 
     @FXML
     private Label settingPassword;
-
+    @FXML
+    private Label myID;
 
 	private Stage stage;
 	private AnchorPane root;
@@ -301,6 +302,7 @@ public class MyAccountController extends Controller implements Initializable{
 		public void display() throws SQLException,IOException {			 	
 				Employee em = ConnectEmployee.readAdById(id);
 				//System.out.print(em.toString());
+				myID.setText( String.valueOf("ID : "+id));
 				settingName.setText(em.getName());
 				SettingPhone.setText(em.getPhone());
 				settingPassword.setText(em.getPassword());

@@ -277,6 +277,19 @@ public class ConnectEmployee {
 		        return -1;
 		    }
 		}
+	 public static int deleteEmployeeById(int id) {
+		 Connection conn = connectDB.getConnection();
+		 int n=0;
+		 try (conn) {
+	        var sql = "DELETE FROM Employee WHERE employee_id = ?";
+	        var ps = conn.prepareStatement(sql);
+	        ps.setInt(1, id);
+	        return ps.executeUpdate();
+	    } catch (SQLException ex) {
+	        ex.printStackTrace();
+	        return -1;
+	    }
+	 }
 	 //CHO ADMIN
 	 public static int updateImageByIdAD(int id, Image image) {
 		    Connection conn = connectDB.getConnection();

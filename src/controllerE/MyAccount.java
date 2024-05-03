@@ -1,6 +1,7 @@
 package controllerE;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -14,13 +15,18 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import model.Employee;
 public class MyAccount extends controller implements Initializable {
-	  @FXML
+
+
+	    @FXML
+	    private Label HelloName;
+
+	    @FXML
 	    private Label address;
-	  @FXML
-	    private ImageView imageView;
+
 	    @FXML
 	    private Label birth;
-
+	    @FXML
+	    private Label hello;
 	    @FXML
 	    private Label department;
 
@@ -29,6 +35,8 @@ public class MyAccount extends controller implements Initializable {
 
 	    @FXML
 	    private Label gender;
+
+
 
 	    @FXML
 	    private Button menu_calendar;
@@ -40,6 +48,9 @@ public class MyAccount extends controller implements Initializable {
 	    private Button menu_setting;
 
 	    @FXML
+	    private Label myID;
+
+	    @FXML
 	    private Label name;
 
 	    @FXML
@@ -48,7 +59,8 @@ public class MyAccount extends controller implements Initializable {
 	    @FXML
 	    private Label phone;
 	    @FXML
-	    private Label hello;
+	    private ImageView imageView;
+
 
 	@FXML
     public void editProfile(ActionEvent event)throws IOException{
@@ -83,11 +95,12 @@ public class MyAccount extends controller implements Initializable {
 	    public void logout(ActionEvent event)throws IOException {
 	    	super.logout(event);
 	 }
+	
 	 @FXML
 		public void display() throws SQLException, IOException {
 			 	
 				Employee em = ConnectEmployee.readEmployeeById(id);
-				System.out.print(em.toString());
+				myID.setText( String.valueOf("ID : "+id));
 				name.setText(em.getName());
 				phone.setText(em.getPhone());
 				password.setText(em.getPassword());
@@ -99,7 +112,7 @@ public class MyAccount extends controller implements Initializable {
 				imageView.setImage(em.getImage());
 			}
 	 public void displayName() {
-	    	hello.setText("Hello : " +getName );
+	    	HelloName.setText("Hello : " +getName );
 	    }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -113,6 +126,9 @@ public class MyAccount extends controller implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
+	
+	
 }
+
+

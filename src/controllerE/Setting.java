@@ -29,8 +29,7 @@ import model.Employee;
 public class Setting extends controller implements Initializable  {
 	@FXML
     private DatePicker SettingBirth;
-	 @FXML
-	    private Label hello;
+
     @FXML
     private TextField SettingPhone;
 
@@ -72,7 +71,8 @@ public class Setting extends controller implements Initializable  {
 
     @FXML
     private Button settingSave;	
-
+    @FXML
+    private Label hi;
 
 	 @FXML
 	 public void insertImage() {
@@ -176,10 +176,9 @@ public class Setting extends controller implements Initializable  {
 	    	}
 	    }
 	  public void displayName() {
-	    	hello.setText("Hello : " +getName );
+	    	hi.setText("Hello : " +getName );
 	    }
-	 public void display() throws SQLException, IOException {
-		 	
+	 public void display() throws SQLException, IOException {	 	
 			Employee em = ConnectEmployee.readEmployeeById(id);			
 			settingName.setText(em.getName());
 			SettingPhone.setText(em.getPhone());

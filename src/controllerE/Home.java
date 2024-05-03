@@ -1,5 +1,6 @@
 package controllerE;
 
+import java.awt.Button;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,8 +11,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 public class Home extends controller implements Initializable {
-	 @FXML
-	    private Label hello;
+
+    @FXML
+    private Label Name;
 	@FXML
     public void HomeE(ActionEvent event)throws IOException {
     	super.HomeE(event);
@@ -35,19 +37,15 @@ public class Home extends controller implements Initializable {
     public void MyAccountE(ActionEvent event)throws IOException{
     	super.MyAccountE(event);
     }
-	
-
 	 @FXML
 	    public void logout(ActionEvent event)throws IOException {
 	    	super.logout(event);
 	 }
-	 public void displayName() {
-	    	hello.setText("Hello : " +getName );
-	    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		displayName();
+		Name.setText(getName);
 		
 	}
+
 }

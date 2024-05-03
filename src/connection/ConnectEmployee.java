@@ -1,5 +1,10 @@
 package connection;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,13 +12,18 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.ByteArrayInputStream;
+import javax.imageio.ImageIO;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.Image;
 import model.Department;
 import model.Employee;
 
 public class ConnectEmployee {
+
 	public static int addEmployee(Employee employee) {
 		Connection conn=connectDB.getConnection();
 		int n = 0;
@@ -55,8 +65,51 @@ public class ConnectEmployee {
 		}
 		
 			return false;
+	}
+
+
+    /*
+    public static String getName(int id) throws SQLException {
+        String name = null;
+        Connection conn = ConnectDB.getConnection(ConnectionType.MYSQL);
+        ResultSet rs;
+        try (conn) {
+            String sql = "SELECT employee_name FROM Employee WHERE employee_id = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                name = rs.getString("employee_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return name;
+    }
+
+    /*
+    public static int getId(Employee employee) throws SQLException {
+        Connection conn = ConnectDB.getConnection(ConnectionType.MYSQL);
+        ResultSet rs;
+        int id = -1;
+        try (conn) {
+            String sql = "select * from Employee where email=? and password = ?";
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, employee.getEmail());
+            ps.setString(2, employee.getPassword());
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                id = rs.getInt("employee_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    
+
 
 	}
+	*/
 	public static List<Employee> readEmployee() {
         List<Employee> employees = new ArrayList<>();		       
         Connection conn =connectDB.getConnection();
@@ -65,8 +118,7 @@ public class ConnectEmployee {
             var statement = conn.createStatement(); // lấy đối tượng Statement
             var resultSet = statement.executeQuery(sql); // lấy đối tượng ResultSet
             while (resultSet.next()) { // nếu có hàng dữ liệu kế tiếp
-            	var employee_id = String.valueOf(resultSet.getInt(1));
-                
+            	var employee_id = String.valueOf(resultSet.getInt(1));             
                 var employee_name = resultSet.getString(2);
                 var gender=resultSet.getString(3);
                 var date_of_birth_sql=resultSet.getDate(4);
@@ -103,8 +155,24 @@ public class ConnectEmployee {
 		}
 		return id;
 	}
-	
-	 public static Employee readEmployeeById(int id) throws SQLException {
+	public static String getNameByAccount(Employee employee) {
+		String name="";
+		var conn=connectDB.getConnection();
+		try(conn){
+			String sql="select * from Employee where email=? and password=?";
+			 PreparedStatement ps=conn.prepareCall(sql);
+             ps.setString(1,employee.getEmail());
+             ps.setString(2,employee.getPassword());
+	         var resultSet = ps.executeQuery();
+	         while (resultSet.next()) { // nếu có hàng dữ liệu kế tiếp
+	             name=resultSet.getString("employee_name");
+	         }
+		}catch(SQLException e)  {
+			e.printStackTrace();
+		}
+		return name;
+	}
+	 public static Employee readEmployeeById(int id) throws SQLException, IOException {
 	        Employee employee = null;
 	        Connection conn = connectDB.getConnection();
 	        try (conn) {
@@ -123,8 +191,17 @@ public class ConnectEmployee {
 	                var phone = resultSet.getString(7);
 	                var email = resultSet.getString(8);
 	                var password = resultSet.getString(9);
-	                 employee = new Employee(employee_id, employee_name, gender, date_of_birth, department_id,
-	                        address, phone, email, password);
+	                byte[] imageData = resultSet.getBytes("image");
+	                Image image = null; // Khởi tạo image là null mặc định
+	                if (imageData != null) {
+	                    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageData));
+	                    image = SwingFXUtils.toFXImage(bufferedImage, null);
+	                } else {
+	                	 //image = getDefaultImage();
+	                }
+	                employee = new Employee(employee_id, employee_name, gender, date_of_birth, department_id,
+	                        address, phone, email, password, image);
+	                
 	                
 	            }
 	        } catch (SQLException throwables) {
@@ -132,7 +209,15 @@ public class ConnectEmployee {
 	        }
 	        return employee;
 	    }
-	 public static int updateEmployeeById(int id,Employee employee) {
+	 /*
+	 private static Image getDefaultImage() {
+		   String defaultImagePath = "C:\\Users\\Admin\\Pictures\\vector-users-icon.png"; // Đường dẫn đến hình ảnh mặc định
+		    Image defaultImage = new Image(new File(defaultImagePath).toURI().toString());
+		    return defaultImage;
+		
+	}
+	*/
+	public static int updateEmployeeById(int id,Employee employee) {
 		 int n=0;
 		 Connection conn = connectDB.getConnection();
 		 try(conn){
@@ -158,7 +243,56 @@ public class ConnectEmployee {
 	            return -1;
 	        }
 	 }
+	 public static byte[] imageToByteArray(Image image) {
+		    try {
+		        // Chuyển đổi Image thành BufferedImage
+		        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+
+		        // Tạo một ByteArrayOutputStream để ghi dữ liệu ảnh vào
+		        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+		        // Ghi BufferedImage vào ByteArrayOutputStream
+		        ImageIO.write(bufferedImage, "png", outputStream);
+
+		        // Trả về mảng byte chứa dữ liệu ảnh
+		        return outputStream.toByteArray();
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        return null;
+		    }
+		}
+	 
+	 public static int updateImageById(int id, Image image) {
+		    Connection conn = connectDB.getConnection();
+		    int n = 0;
+		    try (conn) {
+		    	 byte[] imageData=imageToByteArray(image);
+		        var sql = "UPDATE Employee SET image = ? WHERE employee_id = ?";
+		        var ps = conn.prepareStatement(sql);
+		        ps.setBytes(1, imageData);
+		        ps.setInt(2, id);
+		        return ps.executeUpdate();
+		    } catch (SQLException ex) {
+		        ex.printStackTrace();
+		        return -1;
+		    }
+		}
 	 //CHO ADMIN
+	 public static int updateImageByIdAD(int id, Image image) {
+		    Connection conn = connectDB.getConnection();
+		    int n = 0;
+		    try (conn) {
+		    	 byte[] imageData=imageToByteArray(image);
+		        var sql = "UPDATE Admin SET image = ? WHERE admin_id = ?";
+		        var ps = conn.prepareStatement(sql);
+		        ps.setBytes(1, imageData);
+		        ps.setInt(2, id);
+		        return ps.executeUpdate();
+		    } catch (SQLException ex) {
+		        ex.printStackTrace();
+		        return -1;
+		    }
+		}
 		public static boolean getAccountAD(Employee employee) {
 			Connection conn=connectDB.getConnection();
 			ResultSet rs;
@@ -194,7 +328,24 @@ public class ConnectEmployee {
 			}
 			return id;
 		}
-		 public static Employee readAdById(int id) throws SQLException {
+		public static String getNameByAccountAD(Employee employee) {
+			String name="";
+			var conn=connectDB.getConnection();
+			try(conn){
+				String sql="select * from Admin where email=? and password=?";
+				 PreparedStatement ps=conn.prepareCall(sql);
+	             ps.setString(1,employee.getEmail());
+	             ps.setString(2,employee.getPassword());
+		         var resultSet = ps.executeQuery();
+		         while (resultSet.next()) { // nếu có hàng dữ liệu kế tiếp
+		             name=resultSet.getString("admin_name");
+		         }
+			}catch(SQLException e)  {
+				e.printStackTrace();
+			}
+			return name;
+		}
+		 public static Employee readAdById(int id) throws SQLException, IOException {
 		        Employee employee = null;
 		        Connection conn = connectDB.getConnection();
 		        try (conn) {
@@ -213,8 +364,21 @@ public class ConnectEmployee {
 		                var phone = resultSet.getString(7);
 		                var email = resultSet.getString(8);
 		                var password = resultSet.getString(9);
-		                 employee = new Employee(admin_id, admin_name, gender, date_of_birth, department_id,
-		                        address, phone, email, password);
+		                
+		                byte[] imageData = resultSet.getBytes("image");
+		                Image image = null; // Khởi tạo image là null mặc định
+		                if (imageData != null) {
+		                    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageData));
+		                    image = SwingFXUtils.toFXImage(bufferedImage, null);
+		                } else {
+		                    // Nếu không có dữ liệu hình ảnh từ cơ sở dữ liệu, bạn có thể xác định hình ảnh mặc định ở đây
+		                    // Ví dụ:
+		                    // image = getDefaultImage();
+		                	 //image = getDefaultImage();
+		                }
+		                employee = new Employee(admin_id, admin_name, gender, date_of_birth, department_id,
+		                        address, phone, email, password, image);
+		                
 		                
 		            }
 		        } catch (SQLException throwables) {

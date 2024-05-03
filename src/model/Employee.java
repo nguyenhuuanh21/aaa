@@ -3,6 +3,8 @@ package model;
 
 import java.time.LocalDate;
 
+import javafx.scene.image.Image;
+
 public class Employee {
 	String id;
 	String name;
@@ -13,8 +15,28 @@ public class Employee {
 	String phone;
 	String email;
 	String password;
+	Image image;
 	
-	
+	public Image getImage() {
+		return image;
+	}
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	public Employee(String id, String name, String gender, LocalDate birth, String department, String address,
+			String phone, String email, String password, Image image) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.gender = gender;
+		this.birth = birth;
+		this.department = department;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+		this.password = password;
+		this.image = image;
+	}
 	public Employee(String email, String password) {
 		super();
 		this.email = email;

@@ -109,19 +109,34 @@ public class SettingController extends Controller implements Initializable {
 	    	super.logout(event);
 	 }
 
-	 @FXML
 	 public void insertImage() {
-		 FileChooser fileChooser = new FileChooser();
-	        fileChooser.setTitle("Select Image File");
-	        fileChooser.getExtensionFilters().addAll(
-	                new FileChooser.ExtensionFilter("image", "*.png", "*.jpg", "*.gif")
-	        );
+	     FileChooser fileChooser = new FileChooser();
+	     fileChooser.setTitle("Select Image File");
+	     fileChooser.getExtensionFilters().addAll(
+	             new FileChooser.ExtensionFilter("image", "*.png", "*.jpg", "*.gif")
+	     );
 
-	        File selectedFile = fileChooser.showOpenDialog(new Stage());
-	        if (selectedFile != null) {
-	            Image image = new Image(selectedFile.toURI().toString());
-	            myImage.setImage(image);
-	        }
+	     File selectedFile = fileChooser.showOpenDialog(new Stage());
+	     if (selectedFile != null) {
+	         try {
+	             // Chuyển đổi đường dẫn tệp tin thành URL và sau đó lấy đường dẫn tuyệt đối từ URL
+	             String imagePath = selectedFile.toURI().toURL().toExternalForm();
+	             // Tạo hình ảnh từ đường dẫn tệp tin đã được chuyển đổi
+	             Image image = new Image(imagePath);
+	             // Hiển thị hình ảnh trong ImageView
+	             myImage.setImage(image);
+	             int result = ConnectEmployee.updateImageByIdAD(id, image);
+		            if (result > 0) {
+		                System.out.println("Image updated successfully.");
+		            } else {
+		                System.out.println("Failed to update image.");
+		            }
+	             // Tiếp tục xử lý...
+	         } catch (Exception e) {
+	             e.printStackTrace();
+	             System.out.println("Failed to load image.");
+	         }
+	     }
 	 }
 	 
 	 @FXML
@@ -165,10 +180,9 @@ public class SettingController extends Controller implements Initializable {
 	    		settingDepartment.getItems().addAll(id);
 	    	}
 	    }
-	  public void display() throws SQLException {
+	  public void display() throws SQLException, IOException {
 		 	
-			Employee em = ConnectEmployee.readAdById(id);
-			
+			Employee em = ConnectEmployee.readAdById(id);			
 			settingName.setText(em.getName());
 			SettingPhone.setText(em.getPhone());
 			settingPassword.setText(em.getPassword());
@@ -177,6 +191,7 @@ public class SettingController extends Controller implements Initializable {
 			settingGender.setValue(em.getGender());
 			SettingBirth.setValue(em.getBirth());
 			settingAddress.setText(em.getAddress());
+			myImage.setImage(em.getImage());
 		}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -184,10 +199,13 @@ public class SettingController extends Controller implements Initializable {
 			showGender();
 			showDepartment();
 			display();
+			displayName();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 }

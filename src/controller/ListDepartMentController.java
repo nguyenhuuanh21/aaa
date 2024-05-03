@@ -2,8 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+
 import java.sql.SQLException;
 import java.util.List;
+
 import java.util.ResourceBundle;
 
 import connection.ConnectEmployee;
@@ -13,11 +15,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.fxml.Initializable;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import model.Department;
 import model.Employee;
 
@@ -53,6 +60,11 @@ public class ListDepartMentController extends Controller implements  Initializab
     private Button menu_setting;
 
 
+    @FXML
+    private ImageView HelloImage;
+
+    @FXML
+    private Label HelloName;
 
 
 	@FXML
@@ -111,11 +123,18 @@ public class ListDepartMentController extends Controller implements  Initializab
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
 			display();
+			displayName();
 		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
+
+
+
 
 }

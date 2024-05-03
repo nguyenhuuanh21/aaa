@@ -1,10 +1,17 @@
 package controllerE;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import controllerE.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-public class Home extends controller  {
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+public class Home extends controller implements Initializable {
+	 @FXML
+	    private Label hello;
 	@FXML
     public void HomeE(ActionEvent event)throws IOException {
     	super.HomeE(event);
@@ -34,4 +41,13 @@ public class Home extends controller  {
 	    public void logout(ActionEvent event)throws IOException {
 	    	super.logout(event);
 	 }
+	 public void displayName() {
+	    	hello.setText("Hello : " +getName );
+	    }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		displayName();
+		
+	}
 }

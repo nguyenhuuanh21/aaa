@@ -71,6 +71,11 @@ public class LoginController  implements Initializable {
     	return ID;
     }
 
+    
+    private static String Name;
+    public static String getName() {
+    	return Name;
+    }
 
     @FXML
     public void login(ActionEvent event) throws IOException, SQLException {
@@ -96,6 +101,7 @@ public class LoginController  implements Initializable {
             	 Employee acc=new Employee(email,password);
               	boolean successed=ConnectEmployee.getAccount( acc);
               	if(successed) {
+              			Name=ConnectEmployee.getNameByAccount(acc);
               			ID=ConnectEmployee.getIdByAccount(acc);
                 		login_warning_email.setVisible(false);
         	            login_warning_password.setVisible(false);
@@ -115,6 +121,7 @@ public class LoginController  implements Initializable {
             	 Employee acc=new Employee(email,password);
                	boolean successed=ConnectEmployee.getAccountAD(acc);
                	if(successed) {
+               			Name=ConnectEmployee.getNameByAccountAD(acc);
                			ID=ConnectEmployee.getIdByAccountAD(acc);
                  		login_warning_email.setVisible(false);
          	            login_warning_password.setVisible(false);
@@ -201,6 +208,7 @@ public class LoginController  implements Initializable {
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 root = FXMLLoader.load(getClass().getResource("/view/AdminHome.fxml"));
                 ID = ConnectEmployee.getId(acc);
+                Name = ConnectEmployee.getName(ID);
                 System.out.println(ID);
                 scene = new Scene(root);
                 stage.setScene(scene);

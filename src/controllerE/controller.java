@@ -17,6 +17,7 @@ public class controller {
 	private AnchorPane root;
 	private Scene scene;
 	protected int id = LoginController.getID();
+	protected String getName = LoginController.getName();
 	@FXML
     public void edit(ActionEvent event)throws IOException{
     	stage = (Stage) ((Button) event.getSource()).getScene().getWindow();

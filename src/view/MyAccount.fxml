@@ -86,12 +86,16 @@
                </font>
             </Label>
             <Pane prefHeight="62.0" prefWidth="514.0" />
-            <Label alignment="CENTER" prefHeight="43.0" prefWidth="286.0" text="HELLO : " textFill="#5e7ff1">
+            <Label fx:id="HelloName" alignment="CENTER" prefHeight="43.0" prefWidth="286.0" text="HELLO : " textFill="#5e7ff1">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <FontAwesomeIcon fill="#5e7ff1" glyphName="USER" size="30" />
+            <AnchorPane prefHeight="50.0" prefWidth="57.0" style="-fx-border-color: gray;">
+               <children>
+                  <ImageView fx:id="HelloImage" fitHeight="43.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </AnchorPane>
          </children>
       </HBox>
       <AnchorPane layoutX="239.0" layoutY="62.0" prefHeight="678.0" prefWidth="953.0" style="-fx-background-color: white;">
@@ -229,7 +233,7 @@
             </VBox>
             <AnchorPane layoutX="36.0" layoutY="46.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: gray;">
                <children>
-                  <ImageView fitHeight="152.0" fitWidth="153.0" layoutX="-3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView" fitHeight="152.0" fitWidth="153.0" layoutX="-3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <Label fx:id="myID" alignment="CENTER" layoutX="55.0" layoutY="213.0" prefHeight="30.0" prefWidth="114.0" text="ID : " />

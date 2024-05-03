@@ -189,12 +189,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Employee;
 
 
 public class MyAccountController extends Controller implements Initializable{
+	@FXML
+	private ImageView imageView;
 	@FXML
     private Label SettingBirth;
 
@@ -294,9 +298,9 @@ public class MyAccountController extends Controller implements Initializable{
 	    	super.logout(event);
 	 }
 	 @FXML
-		public void display() throws SQLException {			 	
+		public void display() throws SQLException,IOException {			 	
 				Employee em = ConnectEmployee.readAdById(id);
-				System.out.print(em.toString());
+				//System.out.print(em.toString());
 				settingName.setText(em.getName());
 				SettingPhone.setText(em.getPhone());
 				settingPassword.setText(em.getPassword());
@@ -305,6 +309,7 @@ public class MyAccountController extends Controller implements Initializable{
 				settingGender.setText(em.getGender());
 				SettingBirth.setText(em.getBirth().toString());
 				settingAddress.setText(em.getAddress());
+				imageView.setImage(em.getImage());								
 			}
 
 
@@ -313,7 +318,11 @@ public class MyAccountController extends Controller implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
 			display();
+			displayName();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

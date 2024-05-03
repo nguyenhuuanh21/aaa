@@ -16,6 +16,16 @@ public class Report {
 		this.date = date;
 		this.content=content;
 	}
+	
+	public Report(int reportID, int employeeID, LocalTime time, LocalDate date, String content) {
+		super();
+		this.reportID = reportID;
+		EmployeeID = employeeID;
+		this.time = time;
+		this.date = date;
+		this.content = content;
+	}
+
 	public int getReportID() {
 		return reportID;
 	}

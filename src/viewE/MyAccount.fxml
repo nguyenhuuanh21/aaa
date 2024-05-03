@@ -70,7 +70,7 @@
                </font>
             </Label>
             <Pane prefHeight="62.0" prefWidth="514.0" />
-            <Label alignment="CENTER" prefHeight="43.0" prefWidth="286.0" text="HELLO : " textFill="#5e7ff1">
+            <Label fx:id="hello" alignment="CENTER" prefHeight="43.0" prefWidth="286.0" text="HELLO : " textFill="#5e7ff1">
                <font>
                   <Font size="18.0" />
                </font>
@@ -213,7 +213,7 @@
             </VBox>
             <AnchorPane layoutX="36.0" layoutY="46.0" prefHeight="150.0" prefWidth="150.0" style="-fx-border-color: gray;">
                <children>
-                  <ImageView fitHeight="152.0" fitWidth="153.0" layoutX="-3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView" fitHeight="152.0" fitWidth="153.0" layoutX="-3.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <Label alignment="CENTER" layoutX="55.0" layoutY="213.0" prefHeight="30.0" prefWidth="114.0" text="ID : " />

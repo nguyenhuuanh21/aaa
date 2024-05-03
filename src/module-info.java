@@ -5,6 +5,8 @@ module AAA {
 	requires java.sql;
 	requires javafx.base;
 	requires com.microsoft.sqlserver.jdbc;
+	requires java.desktop;
+	requires javafx.swing;
 	//requires com.microsoft.sqlserver.jdbc;
 	
 	opens application to javafx.graphics, javafx.fxml;

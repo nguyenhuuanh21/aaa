@@ -2,6 +2,7 @@ package controllerE;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,7 +29,8 @@ import model.Employee;
 public class Setting extends controller implements Initializable  {
 	@FXML
     private DatePicker SettingBirth;
-
+	 @FXML
+	    private Label hello;
     @FXML
     private TextField SettingPhone;
 
@@ -69,22 +71,40 @@ public class Setting extends controller implements Initializable  {
     private TextField settingPassword;
 
     @FXML
-    private Button settingSave;
+    private Button settingSave;	
+
+
 	 @FXML
 	 public void insertImage() {
-		 FileChooser fileChooser = new FileChooser();
-	        fileChooser.setTitle("Select Image File");
-	        fileChooser.getExtensionFilters().addAll(
-	                new FileChooser.ExtensionFilter("image", "*.png", "*.jpg", "*.gif")
-	        );
+	     FileChooser fileChooser = new FileChooser();
+	     fileChooser.setTitle("Select Image File");
+	     fileChooser.getExtensionFilters().addAll(
+	             new FileChooser.ExtensionFilter("image", "*.png", "*.jpg", "*.gif")
+	     );
 
-	        File selectedFile = fileChooser.showOpenDialog(new Stage());
-	        if (selectedFile != null) {
-	            Image image = new Image(selectedFile.toURI().toString());
-	            //myImage.setImage(image);
-	        }
+	     File selectedFile = fileChooser.showOpenDialog(new Stage());
+	     if (selectedFile != null) {
+	         try {
+	             // Chuyển đổi đường dẫn tệp tin thành URL và sau đó lấy đường dẫn tuyệt đối từ URL
+	             String imagePath = selectedFile.toURI().toURL().toExternalForm();
+	             // Tạo hình ảnh từ đường dẫn tệp tin đã được chuyển đổi
+	             Image image = new Image(imagePath);
+	             // Hiển thị hình ảnh trong ImageView
+	             myImage.setImage(image);
+	             int result = ConnectEmployee.updateImageById(id, image);
+		            if (result > 0) {
+		                System.out.println("Image updated successfully.");
+		            } else {
+		                System.out.println("Failed to update image.");
+		            }
+	             // Tiếp tục xử lý...
+	         } catch (Exception e) {
+	             e.printStackTrace();
+	             System.out.println("Failed to load image.");
+	         }
+	     }
 	 }
-	
+
 	@FXML
 	 public void saveInfor(ActionEvent event) {
 		 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -155,11 +175,12 @@ public class Setting extends controller implements Initializable  {
 	    		settingDepartment.getItems().addAll(id);
 	    	}
 	    }
-	    
-	 public void display() throws SQLException {
+	  public void displayName() {
+	    	hello.setText("Hello : " +getName );
+	    }
+	 public void display() throws SQLException, IOException {
 		 	
-			Employee em = ConnectEmployee.readEmployeeById(id);
-			
+			Employee em = ConnectEmployee.readEmployeeById(id);			
 			settingName.setText(em.getName());
 			SettingPhone.setText(em.getPhone());
 			settingPassword.setText(em.getPassword());
@@ -168,6 +189,7 @@ public class Setting extends controller implements Initializable  {
 			settingGender.setValue(em.getGender());
 			SettingBirth.setValue(em.getBirth());
 			settingAddress.setText(em.getAddress());
+			myImage.setImage(em.getImage());
 		}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -175,7 +197,11 @@ public class Setting extends controller implements Initializable  {
 			showGender();
 			showDepartment();
 			display();
+			displayName();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

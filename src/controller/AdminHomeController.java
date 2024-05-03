@@ -2,9 +2,11 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import connection.ConnectEmployee;
 import connection.connectDepartment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,13 +20,17 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import model.Department;
 import model.Employee;
 
 public class AdminHomeController extends Controller implements Initializable{
-		Employee loggedInEmployee;
-
+		@FXML
+	    private ImageView HelloImage;
+		@FXML
+		    private Label HelloName;
 	    @FXML
 	    LineChart<String, Number> myLineChart = new LineChart<>(new CategoryAxis(), new NumberAxis());
 	    
@@ -92,8 +98,12 @@ public class AdminHomeController extends Controller implements Initializable{
 		    public void logout(ActionEvent event)throws IOException {
 		    	 super.logout(event);
 		 }
-    
-    private void inPieChart() {
+		 public void display() throws SQLException, IOException {
+		    	HelloName.setText("Hello : " +name );
+		    	Employee em=ConnectEmployee.readAdById(id);
+		    	HelloImage.setImage(em.getImage());
+		    }
+		 private void inPieChart() {
     	 List<Department> list = connectDepartment.readDepartment();
     	    ObservableList<PieChart.Data> pieCharData = FXCollections.observableArrayList();
     	    
@@ -114,6 +124,13 @@ public class AdminHomeController extends Controller implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		try {
+			display();
+			displayName();
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// TODO Auto-generated method stub
 		inLineChart();
 		inPieChart();

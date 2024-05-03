@@ -84,8 +84,8 @@ public class ListEmployeeController extends Controller implements Initializable 
                         setGraphic(null);
                         setText(null);
                     } else {
-                        Button deleteButton = new Button("B");
-                        Button editButton = new Button("A");
+                        Button deleteButton = new Button("del");
+                        Button editButton = new Button("edit");
                         deleteButton.setOnAction(event -> {
                             Employee employee = getTableView().getItems().get(getIndex());
                             // Implement delete functionality here
@@ -125,7 +125,7 @@ public class ListEmployeeController extends Controller implements Initializable 
     }
 
     public void setting(ActionEvent event) throws IOException {
-        super.setting(event);
+        super.adminMyAccount(event);
     }
 
     public void logout(ActionEvent event) throws IOException {
@@ -143,9 +143,13 @@ public class ListEmployeeController extends Controller implements Initializable 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
+        	displayName();
             display();
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-        }
+        } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

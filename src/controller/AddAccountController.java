@@ -22,6 +22,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,6 +37,8 @@ import model.Department;
 import model.Employee;
 
 public class AddAccountController extends Controller implements Initializable {
+	
+	 
 
     @FXML
     private TextField addAddress;
@@ -155,6 +158,8 @@ public class AddAccountController extends Controller implements Initializable {
             });
         }
     }
+    
+    
 
                 	/*
 =======
@@ -211,6 +216,7 @@ public class AddAccountController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+
         // TODO Auto-generated method stub
 
     	try {
@@ -221,5 +227,16 @@ public class AddAccountController extends Controller implements Initializable {
 			ex.printStackTrace();
 		}
 
+/*
+        try {
+        	super.displayName();
+            showDepartment();
+            showGender();
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+
     }
+    */
+}
 }

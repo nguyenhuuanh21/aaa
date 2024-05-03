@@ -11,11 +11,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import model.Employee;
 public class MyAccount extends controller implements Initializable {
 	  @FXML
 	    private Label address;
-
+	  @FXML
+	    private ImageView imageView;
 	    @FXML
 	    private Label birth;
 
@@ -45,6 +47,8 @@ public class MyAccount extends controller implements Initializable {
 
 	    @FXML
 	    private Label phone;
+	    @FXML
+	    private Label hello;
 
 	@FXML
     public void editProfile(ActionEvent event)throws IOException{
@@ -80,7 +84,7 @@ public class MyAccount extends controller implements Initializable {
 	    	super.logout(event);
 	 }
 	 @FXML
-		public void display() throws SQLException {
+		public void display() throws SQLException, IOException {
 			 	
 				Employee em = ConnectEmployee.readEmployeeById(id);
 				System.out.print(em.toString());
@@ -92,12 +96,20 @@ public class MyAccount extends controller implements Initializable {
 				gender.setText(em.getGender());
 				birth.setText(em.getBirth().toString());
 				address.setText(em.getAddress());
+				imageView.setImage(em.getImage());
 			}
+	 public void displayName() {
+	    	hello.setText("Hello : " +getName );
+	    }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
 			display();
+			displayName();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

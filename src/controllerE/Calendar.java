@@ -31,7 +31,9 @@ public class Calendar extends controller  implements Initializable  {
 
     @FXML
     private FlowPane calendar_date;
-    
+
+    @FXML
+    private Label hello;
     @FXML
     public void backOneMonth(ActionEvent event) {
         dateFocus = dateFocus.minusMonths(1);
@@ -141,10 +143,12 @@ public class Calendar extends controller  implements Initializable  {
 	    public void logout(ActionEvent event)throws IOException {
 	    	super.logout(event);
 	 }
-
+	 public void displayName() {
+	    	hello.setText("Hello : " +getName );
+	    }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+		displayName();
 	}
 }

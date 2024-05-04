@@ -75,17 +75,6 @@ public class AddAccountController extends Controller implements Initializable {
     	addGender.getItems().add("Male");
     	addGender.getItems().add("Female");
     }
-    /*
-   @FXML
-    private void showDepartment() throws ClassNotFoundException, SQLException {
-    	ArrayList<Department> list = connectDepartment.getDepartment();
-    	String[] name = new String[list.size()];
-    	for(int i = 0 ;i < list.size();i++)
-    		name[i] = list.get(i).getDepartment_name();
-    	
-    	addDepartment.getItems().addAll(name);
-   }
-   */
     @FXML
     private void showDepartment() {
     	List<Department> departments = connectDepartment.readDepartment();
@@ -143,12 +132,6 @@ public class AddAccountController extends Controller implements Initializable {
                     }else {
                     	 System.out.println("No"); 
                     }
-                	/*
-                    alert1.setContentText("Register successfully");
-                    System.out.println("Yes");
-                    
-                    alert1.showAndWait();
-                    */
                     try {
                         super.adminEmployees(event);
                     } catch (IOException e) {
@@ -160,24 +143,6 @@ public class AddAccountController extends Controller implements Initializable {
     }
     
     
-
-                	/*
-=======
-                    Alert alert1 = new Alert(Alert.AlertType.CONFIRMATION);              	               	
->>>>>>> 40e44fc388683c443727250614b6a9af5ef95afd
-                    alert1.setContentText("Register successfully");
-                    System.out.println("Yes");                  
-                    alert1.showAndWait();              
-                    try {
-                        super.adminEmployees(event);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    }
-    */
 
     @FXML
     public void adminHome(ActionEvent event) throws IOException {
@@ -227,16 +192,5 @@ public class AddAccountController extends Controller implements Initializable {
 			ex.printStackTrace();
 		}
 
-/*
-        try {
-        	super.displayName();
-            showDepartment();
-            showGender();
-        } catch (SQLException ex){
-            ex.printStackTrace();
-        }
-
-    }
-    */
 }
 }

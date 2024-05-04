@@ -12,8 +12,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -25,11 +27,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Employee;
 
 public class ListEmployeeController extends Controller implements Initializable {
+	private Stage stage;
+	private AnchorPane root;
+	private Scene scene;
+	
+	private static String employee_id;
+	public static String getEmployeeID() {
+		return employee_id;
+	}
 
     @FXML
     private TableColumn<Employee, String> colAddress;
@@ -123,7 +135,22 @@ public class ListEmployeeController extends Controller implements Initializable 
                         });
                         editButton.setOnAction(event -> {
                             Employee employee = getTableView().getItems().get(getIndex());
-                            // Implement edit functionality here
+                            employee_id = employee.getId();
+                            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                       	 try {
+                   				root = FXMLLoader.load(getClass().getResource("/view/editProfile.fxml"));
+                   			} catch (IOException e) {
+                   				// TODO Auto-generated catch block
+                   				e.printStackTrace();
+                   			}
+
+                           if(root == null) {
+                           	System.out.println("Root is null");
+                           	return;
+                           }
+                           scene = new Scene(root);
+                           stage.setScene(scene);
+                           stage.show();
                             System.out.println("Edit employee: " + employee.getName());
                         });
                         HBox manageBtn = new HBox(editButton, deleteButton);

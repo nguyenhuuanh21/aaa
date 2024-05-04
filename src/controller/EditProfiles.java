@@ -27,7 +27,9 @@ import model.Department;
 import model.Employee;
 
 
-public class SettingController extends Controller implements Initializable {
+public class EditProfiles extends Controller implements Initializable {
+	
+	protected String employee_id= ListEmployeeController.getEmployeeID();
 	 @FXML
 	 private DatePicker SettingBirth;
 
@@ -119,13 +121,11 @@ public class SettingController extends Controller implements Initializable {
 	     File selectedFile = fileChooser.showOpenDialog(new Stage());
 	     if (selectedFile != null) {
 	         try {
-	             // Chuyển đổi đường dẫn tệp tin thành URL và sau đó lấy đường dẫn tuyệt đối từ URL
 	             String imagePath = selectedFile.toURI().toURL().toExternalForm();
-	             // Tạo hình ảnh từ đường dẫn tệp tin đã được chuyển đổi
 	             Image image = new Image(imagePath);
 	             // Hiển thị hình ảnh trong ImageView
 	             myImage.setImage(image);
-	             int result = ConnectEmployee.updateImageByIdAD(id, image);
+	             int result = ConnectEmployee.updateImageByIdAD(Integer.parseInt(employee_id), image);
 		            if (result > 0) {
 		                System.out.println("Image updated successfully.");
 		            } else {
@@ -149,7 +149,7 @@ public class SettingController extends Controller implements Initializable {
              if (response == ButtonType.OK) {
             	 Employee employee=new Employee(settingName.getText(),settingGender.getValue(),SettingBirth.getValue(),
             			 settingDepartment.getValue(),settingAddress.getText(),SettingPhone.getText(),settingEmail.getText(),settingPassword.getText());
-            	 int n=ConnectEmployee.updateAdminById(id, employee);
+            	 int n=ConnectEmployee.updateAdminById(Integer.parseInt(employee_id), employee);
             	 if(n!=0) {
             		
             		 connectDepartment.updateQuantityEmployee();
@@ -175,7 +175,6 @@ public class SettingController extends Controller implements Initializable {
 	    private void showDepartment() {
 	    	List<Department> departments = connectDepartment.readDepartment();
 	    	String []id=new String[departments.size()+1];
-	    	settingDepartment.getItems().clear();
 	    	for(int i=0;i<departments.size();i++) {
 	    		id[i]=departments.get(i).getDepartment_id();
 	    	}
@@ -183,7 +182,7 @@ public class SettingController extends Controller implements Initializable {
 	    }
 	  public void display() throws SQLException, IOException {
 		 	
-			Employee em = ConnectEmployee.readAdById(id);			
+			Employee em = ConnectEmployee.readEmployeeById(Integer.parseInt(employee_id));		
 			settingName.setText(em.getName());
 			SettingPhone.setText(em.getPhone());
 			settingPassword.setText(em.getPassword());

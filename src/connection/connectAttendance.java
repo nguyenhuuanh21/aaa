@@ -14,8 +14,8 @@ public class connectAttendance {
 	    Map<Integer, Integer> attendanceMap = new HashMap<>();
 	    String sql = "SELECT DAY(checkE_date) AS day_of_month, " +
 	                 "CASE " +
-	                 "WHEN COUNT(*) > 0 AND SUM(CASE WHEN checkout_time IS NULL OR checkin_time IS NULL THEN 1 ELSE 0 END) > 0 THEN 3 " +
-	                 "WHEN COUNT(*) > 0 AND SUM(TIME_TO_SEC(TIMEDIFF(checkout_time, checkin_time))/3600) >= 8 THEN 1 " +
+	                 "WHEN COUNT(*) > 0 AND SUM(CASE WHEN checkout_datetime IS NULL OR checkin_time IS NULL THEN 1 ELSE 0 END) > 0 THEN 3 " +
+	                 "WHEN COUNT(*) > 0 AND SUM(TIME_TO_SEC(TIMEDIFF(checkout_time, checkin_datetime))/3600) >= 8 THEN 1 " +
 	                 "ELSE 2 " +
 	                 "END AS attendance_status " +
 	                 "FROM attendance " +

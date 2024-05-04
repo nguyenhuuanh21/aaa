@@ -172,7 +172,7 @@ public class SettingController extends Controller implements Initializable {
 		  settingGender.getItems().add("Female");
 	    }
 	  @FXML
-	    private void showDepartment() {
+	    private void showDepartment() throws SQLException {
 	    	List<Department> departments = connectDepartment.readDepartment();
 	    	String []id=new String[departments.size()+1];
 	    	settingDepartment.getItems().clear();

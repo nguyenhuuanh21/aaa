@@ -1,5 +1,4 @@
 package connection;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -45,8 +44,8 @@ public class connectDB {
             System.out.println(conn.getCatalog());
         } catch (SQLException ex) {
             ex.printStackTrace();
-        }
-        return conn;
-    }
-    */
+         }
+        }*/
 }
+
+

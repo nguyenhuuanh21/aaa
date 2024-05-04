@@ -18,7 +18,6 @@ import javax.imageio.ImageIO;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import model.Department;
 import model.Employee;
 
 public class ConnectEmployee {
@@ -48,24 +47,30 @@ public class ConnectEmployee {
 		 return n;
 	}
 	public static boolean getAccount(Employee employee) {
-	    Connection conn = connectDB.getConnection();
+	    Connection conn = null;
+	    PreparedStatement ps = null;
 	    ResultSet rs = null;
+	    
 	    try {
+	        conn = connectDB.getConnection();
 	        String sql = "SELECT * FROM Employee WHERE email=? AND password=?";
-	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps = conn.prepareStatement(sql);
 	        ps.setString(1, employee.getEmail());
 	        ps.setString(2, employee.getPassword());
 	        rs = ps.executeQuery();
-	        if (rs.next()) {
-	            return true;
-	        }
+	        
+	        return rs.next(); // If there is a matching record, return true
+	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
-	        // Đóng ResultSet và PreparedStatement ở đây
+	        // Close ResultSet, PreparedStatement, and Connection here
 	        try {
 	            if (rs != null) {
 	                rs.close();
+	            }
+	            if (ps != null) {
+	                ps.close();
 	            }
 	            if (conn != null) {
 	                conn.close();
@@ -74,12 +79,11 @@ public class ConnectEmployee {
 	            e.printStackTrace();
 	        }
 	    }
+	    
 	    return false;
 	}
 
 
-
-   
 	public static List<Employee> readEmployee() {
         List<Employee> employees = new ArrayList<>();		       
         Connection conn =connectDB.getConnection();
@@ -103,7 +107,7 @@ public class ConnectEmployee {
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }
+        } 
         return employees;
     }
 	public static int getIdByAccount(Employee employee) {
@@ -177,7 +181,6 @@ public class ConnectEmployee {
 	        }
 	        return employee;
 	    }
-
 	public static int updateEmployeeById(int id,Employee employee) {
 		 int n=0;
 		 Connection conn = connectDB.getConnection();

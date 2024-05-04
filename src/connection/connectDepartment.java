@@ -7,28 +7,32 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import java.util.Map;
 import model.Department;
 
 public class connectDepartment {
-	public static List<Department> readDepartment() {
-	    List<Department> departments = new ArrayList<>();
-	    try (Connection conn = connectDB.getConnection()) {
-	        var sql = "SELECT * FROM department ORDER BY department_id ASC"; // câu lệnh truy vấn SQL
-	        var statement = conn.createStatement(); // lấy đối tượng Statement
-	        var resultSet = statement.executeQuery(sql); // lấy đối tượng ResultSet
-	        while (resultSet.next()) { // nếu có hàng dữ liệu kế tiếp
-	            var department_id = resultSet.getString("department_id");
-	            var department_name = resultSet.getString("department_name");
-	            Department department = new Department(department_id, department_name);
-	            departments.add(department); 
+	 public static List<Department> readDepartment() throws SQLException {
+	        List<Department> departments = new ArrayList<>();		       
+	        Connection conn =connectDB.getConnection();
+	        try (conn) {
+	            var sql = "SELECT * FROM dbo.departments ORDER BY department_id ASC "; // câu lệnh truy vấn SQL
+	            var statement = conn.createStatement(); // lấy đối tượng Statement
+	            var resultSet = statement.executeQuery(sql); // lấy đối tượng ResultSet
+	            while (resultSet.next()) { // nếu có hàng dữ liệu kế tiếp
+	                var department_id = resultSet.getString(1);
+	                var department_name = resultSet.getString(2);
+	                var department_quantity=resultSet.getInt(3);
+	                Department department = new Department(department_id,department_name,department_quantity);
+	                departments.add(department); 
+	            }
+	        } catch (SQLException throwables) {
+	            throwables.printStackTrace();
 	        }
-	    } catch (SQLException throwables) {
-	        throwables.printStackTrace();
+	        return departments;
 	    } 
-	    return departments;
-	}
+	    
+	
 	
 	public static Map<String, Integer> countEmployeesByDepartment() throws SQLException {
         Map<String, Integer> departmentEmployeeCountMap = new HashMap<>();
@@ -76,4 +80,6 @@ public class connectDepartment {
 			
 		}
 	
+
 }
+

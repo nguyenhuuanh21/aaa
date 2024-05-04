@@ -4,14 +4,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import connection.connectAttendance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
@@ -59,7 +60,8 @@ public class CalendarController extends Controller implements Initializable {
         double spacingH = calendar_date.getHgap();
         double spacingV = calendar_date.getVgap();
         
-        List<Integer> list = getCalendarActivitiesMonth(dateFocus);
+        Map<Integer,Integer> map = connectAttendance.totalEmployeeWork(dateFocus.getMonthValue());
+        
         int monthMaxDate = dateFocus.getMonth().maxLength();
         if(dateFocus.getYear() % 4 != 0 && monthMaxDate == 29){
             monthMaxDate = 28;
@@ -86,12 +88,20 @@ public class CalendarController extends Controller implements Initializable {
                         date.setTranslateY(textTranslationY);
                         stackPane.getChildren().add(date);
 
-                        if(list.contains(currentDate)){
+                        if (map.containsKey(currentDate)) {
                             VBox calendarActivityBox = new VBox();
                             calendarActivityBox.setTranslateY((rectangleHeight / 2) * 0.20);
                             calendarActivityBox.setMaxWidth(rectangleWidth * 0.8);
                             calendarActivityBox.setMaxHeight(rectangleHeight * 0.65);
+                            
+                            Integer value = map.get(currentDate); // Lấy giá trị từ map bằng currentDate
+                            Text numberText = new Text(value.toString()); // Tạo đối tượng Text chứa giá trị từ map
+                            numberText.setScaleX(3);
+                            numberText.setScaleY(3);
+                            calendarActivityBox.getChildren().add(numberText);
+                            calendarActivityBox.setAlignment(Pos.CENTER);
                             calendarActivityBox.setStyle("-fx-background-color:LIME");
+                            
                             stackPane.getChildren().add(calendarActivityBox);
                         }
                         
@@ -103,17 +113,6 @@ public class CalendarController extends Controller implements Initializable {
                 calendar_date.getChildren().add(stackPane);
         	}
         }
-    }
-
-    private List<Integer> getCalendarActivitiesMonth(ZonedDateTime dateFocus) {
-        List<Integer> list = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 20; i++) {
-            int randomDay = random.nextInt(27) + 1;
-            list.add(randomDay);
-        }
-
-        return list;
     }
 
 	@FXML

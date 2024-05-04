@@ -14,7 +14,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -86,15 +89,36 @@ public class ListEmployeeController extends Controller implements Initializable 
                     } else {
                         Button deleteButton = new Button("del");
                         Button editButton = new Button("edit");
+                        
+
                         deleteButton.setOnAction(event -> {
                             Employee employee = getTableView().getItems().get(getIndex());
                             int eId = Integer.parseInt(employee.getId());
-                            int n=ConnectEmployee.deleteEmployeeById(eId);
-                            if(n>0) {
-                            	System.out.println("Delete employee: " + employee.getName());
-                            	connectDepartment.updateQuantityEmployee();
-                            }else {
-                            	System.out.println("Delete employee failed ");
+                            
+                            Alert confirmAlert = new Alert(AlertType.CONFIRMATION);
+                            confirmAlert.setTitle("Confirm Delete");
+                            confirmAlert.setHeaderText(null);
+                            confirmAlert.setContentText("Are you sure you want to delete employee: " + employee.getName() + "?");
+                            
+                            // Show the confirmation dialog and wait for user response
+                            ButtonType confirmResult = confirmAlert.showAndWait().orElse(ButtonType.CANCEL);
+                            
+                            if (confirmResult == ButtonType.OK) {
+                                int n = ConnectEmployee.deleteEmployeeById(eId);
+
+                                Alert resultAlert = new Alert(AlertType.INFORMATION);
+                                resultAlert.setTitle("Delete Employee");
+
+                                if (n > 0) {
+                                    resultAlert.setHeaderText(null);
+                                    resultAlert.setContentText("Delete employee: " + employee.getName());
+                                    connectDepartment.updateQuantityEmployee();
+                                } else {
+                                    resultAlert.setHeaderText(null);
+                                    resultAlert.setContentText("Delete employee failed");
+                                }
+
+                                resultAlert.showAndWait();
                             }
                         });
                         editButton.setOnAction(event -> {

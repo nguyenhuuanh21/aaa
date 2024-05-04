@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import connection.ConnectEmployee;
@@ -27,11 +28,7 @@ import model.Department;
 import model.Employee;
 
 public class AdminHomeController extends Controller implements Initializable{
-		@FXML
-	    private ImageView HelloImage;
-		@FXML
-		    private Label HelloName;
-	    @FXML
+		
 	    LineChart<String, Number> myLineChart = new LineChart<>(new CategoryAxis(), new NumberAxis());
 	    
 	    @FXML
@@ -98,41 +95,49 @@ public class AdminHomeController extends Controller implements Initializable{
 		    public void logout(ActionEvent event)throws IOException {
 		    	 super.logout(event);
 		 }
-		 public void display() throws SQLException, IOException {
-		    	HelloName.setText("Hello : " +name );
-		    	Employee em=ConnectEmployee.readAdById(id);
-		    	HelloImage.setImage(em.getImage());
+		
+		 private void inPieChart() throws SQLException {
+		        // Gọi hàm countEmployeeDepartment để đếm số nhân viên của từng phòng ban
+		        Map<String, Integer> departmentEmployeeCountMap = connectDepartment.countEmployeesByDepartment();
+
+		        // Tạo danh sách dữ liệu cho PieChart
+		        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+		        // Duyệt qua từng phòng ban và thêm dữ liệu vào PieChart
+		        for (Map.Entry<String, Integer> entry : departmentEmployeeCountMap.entrySet()) {
+		            String departmentName = entry.getKey();
+		            int employeeCount = entry.getValue();
+		            pieChartData.add(new PieChart.Data(departmentName, employeeCount));
+		        }
+
+		        // Đặt dữ liệu vào PieChart
+		        myPieChart.setData(pieChartData);
+
+		        // Kiểm tra nếu biểu đồ rỗng
+		        if (myPieChart.getData().isEmpty()) {
+		            System.out.println("Pie chart is empty");
+		        }
 		    }
-		 private void inPieChart() {
-    	 List<Department> list = connectDepartment.readDepartment();
-    	    ObservableList<PieChart.Data> pieCharData = FXCollections.observableArrayList();
-    	    
-    	    // Duyệt qua danh sách phòng ban và thêm dữ liệu vào PieChart
-    	    for (Department department : list) {
-    	        pieCharData.add(new PieChart.Data(department.getDepartment_name(), department.getDpartment_quanity()));
-    	    }
-		myPieChart.setData(pieCharData);
-		if(myPieChart == null) {
-			System.out.println("Pie chart is null");
-		}
-	}
-    
+
     
   
-
- 
-
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			display();
+			
 			displayName();
 		} catch (SQLException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-		inLineChart();
-		inPieChart();
+		
+		try {
+			inLineChart();
+			inPieChart();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

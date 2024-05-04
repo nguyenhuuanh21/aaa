@@ -15,7 +15,6 @@ import java.util.List;
 import java.io.ByteArrayInputStream;
 import javax.imageio.ImageIO;
 
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
@@ -49,72 +48,43 @@ public class ConnectEmployee {
 		 return n;
 	}
 	public static boolean getAccount(Employee employee) {
-		Connection conn=connectDB.getConnection();
-		ResultSet rs;
-		try(conn){
-			String sql="select*from Employee where email=? and password=?";
-			PreparedStatement ps=conn.prepareCall(sql);
-			ps.setString(1, employee.getEmail());
+	    Connection conn = connectDB.getConnection();
+	    ResultSet rs = null;
+	    try {
+	        String sql = "SELECT * FROM Employee WHERE email=? AND password=?";
+	        PreparedStatement ps = conn.prepareStatement(sql);
+	        ps.setString(1, employee.getEmail());
 	        ps.setString(2, employee.getPassword());
-			rs=ps.executeQuery();
-			if( rs.next()) {
-				return true;
-			}
-		}catch(SQLException e)  {
-			e.printStackTrace();
-		}
-		
-			return false;
+	        rs = ps.executeQuery();
+	        if (rs.next()) {
+	            return true;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        // Đóng ResultSet và PreparedStatement ở đây
+	        try {
+	            if (rs != null) {
+	                rs.close();
+	            }
+	            if (conn != null) {
+	                conn.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return false;
 	}
 
 
-    /*
-    public static String getName(int id) throws SQLException {
-        String name = null;
-        Connection conn = ConnectDB.getConnection(ConnectionType.MYSQL);
-        ResultSet rs;
-        try (conn) {
-            String sql = "SELECT employee_name FROM Employee WHERE employee_id = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                name = rs.getString("employee_name");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return name;
-    }
 
-    /*
-    public static int getId(Employee employee) throws SQLException {
-        Connection conn = ConnectDB.getConnection(ConnectionType.MYSQL);
-        ResultSet rs;
-        int id = -1;
-        try (conn) {
-            String sql = "select * from Employee where email=? and password = ?";
-            PreparedStatement ps = conn.prepareCall(sql);
-            ps.setString(1, employee.getEmail());
-            ps.setString(2, employee.getPassword());
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                id = rs.getInt("employee_id");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return id;
-    
-
-
-	}
-	*/
+   
 	public static List<Employee> readEmployee() {
         List<Employee> employees = new ArrayList<>();		       
         Connection conn =connectDB.getConnection();
         try (conn) {
-            var sql = "SELECT * FROM dbo.Employee"; // câu lệnh truy vấn SQL
+            var sql = "SELECT * FROM Employee"; // câu lệnh truy vấn SQL
             var statement = conn.createStatement(); // lấy đối tượng Statement
             var resultSet = statement.executeQuery(sql); // lấy đối tượng ResultSet
             while (resultSet.next()) { // nếu có hàng dữ liệu kế tiếp
@@ -131,8 +101,6 @@ public class ConnectEmployee {
                 Employee employee = new Employee(employee_id,employee_name,gender,date_of_birth,department_id,address,phone,email,password);
                 employees.add(employee); 
             }
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -209,14 +177,7 @@ public class ConnectEmployee {
 	        }
 	        return employee;
 	    }
-	 /*
-	 private static Image getDefaultImage() {
-		   String defaultImagePath = "C:\\Users\\Admin\\Pictures\\vector-users-icon.png"; // Đường dẫn đến hình ảnh mặc định
-		    Image defaultImage = new Image(new File(defaultImagePath).toURI().toString());
-		    return defaultImage;
-		
-	}
-	*/
+
 	public static int updateEmployeeById(int id,Employee employee) {
 		 int n=0;
 		 Connection conn = connectDB.getConnection();
@@ -235,13 +196,10 @@ public class ConnectEmployee {
 	         ps.setString(8,employee.getPassword());
 	         ps.setInt(9,id);
 	         return ps.executeUpdate();
-		 }catch (SQLServerException ex) {
+		 }catch (SQLException ex) {
 	           	ex.printStackTrace();
 	            return -1;
-	        } catch (SQLException ex) {
-	        	 ex.printStackTrace();
-	            return -1;
-	        }
+	        } 
 	 }
 	 public static byte[] imageToByteArray(Image image) {
 		    try {
@@ -417,12 +375,9 @@ public class ConnectEmployee {
 		         ps.setString(8,employee.getPassword());
 		         ps.setInt(9,id);
 		         return ps.executeUpdate();
-			 }catch (SQLServerException ex) {
+			 }catch (SQLException ex) {
 		           	ex.printStackTrace();
 		            return -1;
-		        } catch (SQLException ex) {
-		        	 ex.printStackTrace();
-		            return -1;
-		        }
+		        } 
 		 }
 }

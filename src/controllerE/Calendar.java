@@ -5,9 +5,11 @@ import java.net.URL;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import connection.connectAttendance;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -58,7 +60,7 @@ public class Calendar extends controller  implements Initializable  {
         double spacingH = calendar_date.getHgap();
         double spacingV = calendar_date.getVgap();
         
-        List<Integer> list = getCalendarActivitiesMonth(dateFocus);
+        Map<Integer,Integer> map = connectAttendance.getEmployeeAttendance(id, dateFocus.getMonthValue());
         int monthMaxDate = dateFocus.getMonth().maxLength();
         if(dateFocus.getYear() % 4 != 0 && monthMaxDate == 29){
             monthMaxDate = 28;
@@ -85,12 +87,19 @@ public class Calendar extends controller  implements Initializable  {
                         date.setTranslateY(textTranslationY);
                         stackPane.getChildren().add(date);
 
-                        if(list.contains(currentDate)){
+                        if(map.containsKey(currentDate)){
                             VBox calendarActivityBox = new VBox();
                             calendarActivityBox.setTranslateY((rectangleHeight / 2) * 0.20);
                             calendarActivityBox.setMaxWidth(rectangleWidth * 0.8);
                             calendarActivityBox.setMaxHeight(rectangleHeight * 0.65);
-                            calendarActivityBox.setStyle("-fx-background-color:LIME");
+                            Integer value = map.get(currentDate); 
+                            if(value == 1) {
+                            	 calendarActivityBox.setStyle("-fx-background-color:LIME");
+                            }else if(value == 2) {
+                            	calendarActivityBox.setStyle("-fx-background-color:ORANGE");
+                            }else {
+                            	calendarActivityBox.setStyle("-fx-background-color:ORANGERED");
+                            }
                             stackPane.getChildren().add(calendarActivityBox);
                         }
                         
@@ -104,16 +113,6 @@ public class Calendar extends controller  implements Initializable  {
         }
     }
 
-    private List<Integer> getCalendarActivitiesMonth(ZonedDateTime dateFocus) {
-        List<Integer> list = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 20; i++) {
-            int randomDay = random.nextInt(27) + 1;
-            list.add(randomDay);
-        }
-
-        return list;
-    }
 	@FXML
     public void HomeE(ActionEvent event)throws IOException {
     	super.HomeE(event);
@@ -149,6 +148,9 @@ public class Calendar extends controller  implements Initializable  {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		dateFocus = ZonedDateTime.now();
+        today = ZonedDateTime.now();
+        drawCalendar();
 		displayName();
 	}
 }
